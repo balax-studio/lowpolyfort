@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="UnitData" load_steps=2 format=3 uid="uid://cunitdatarifleman"]
+
+[ext_resource type="Script" path="res://scripts/unit_data.gd" id="1_unit"]
+
+[resource]
+script = ExtResource("1_unit")
+unit_type = "rifleman"
+damage = 12.0
+attack_speed = 1.2
+range_radius = 7.5
+projectile_speed = 18.0
+critical_chance = 0.05
+critical_damage = 1.75
+target_priority = "closest_to_base"

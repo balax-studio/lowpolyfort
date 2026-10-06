@@ -1,0 +1,80 @@
+[gd_scene load_steps=12 format=3 uid="uid://cenemy01basic"]
+
+[ext_resource type="Script" path="res://scripts/enemy.gd" id="1_enemy"]
+
+[sub_resource type="StandardMaterial3D" id="Mat_MutantSkin"]
+albedo_color = Color(0.72, 0.24, 0.28, 1)
+roughness = 0.8
+
+[sub_resource type="BoxMesh" id="Mesh_Torso"]
+material = SubResource("Mat_MutantSkin")
+size = Vector3(0.7, 0.8, 0.65)
+
+[sub_resource type="BoxMesh" id="Mesh_Head"]
+material = SubResource("Mat_MutantSkin")
+size = Vector3(0.5, 0.4, 0.45)
+
+[sub_resource type="StandardMaterial3D" id="Mat_Eye"]
+albedo_color = Color(1, 0.8, 0.1, 1)
+emission_enabled = true
+emission = Color(1, 0.8, 0.1, 1)
+emission_energy_multiplier = 2.0
+
+[sub_resource type="BoxMesh" id="Mesh_Eyes"]
+material = SubResource("Mat_Eye")
+size = Vector3(0.35, 0.1, 0.08)
+
+[sub_resource type="StandardMaterial3D" id="Mat_HpBg"]
+albedo_color = Color(0.1, 0.1, 0.12, 1)
+
+[sub_resource type="BoxMesh" id="Mesh_HpBg"]
+material = SubResource("Mat_HpBg")
+size = Vector3(0.75, 0.08, 0.04)
+
+[sub_resource type="StandardMaterial3D" id="Mat_HpFill"]
+albedo_color = Color(0.9, 0.2, 0.2, 1)
+emission_enabled = true
+emission = Color(0.8, 0.15, 0.15, 1)
+emission_energy_multiplier = 1.0
+
+[sub_resource type="BoxMesh" id="Mesh_HpFill"]
+material = SubResource("Mat_HpFill")
+size = Vector3(0.7, 0.06, 0.05)
+
+[sub_resource type="BoxShape3D" id="Shape_EnemyCollider"]
+size = Vector3(0.9, 1.2, 0.9)
+
+[node name="Enemy" type="Node3D" groups=["enemies"]]
+script = ExtResource("1_enemy")
+
+[node name="ModelRoot" type="Node3D" parent="."]
+
+[node name="BodyMesh" type="MeshInstance3D" parent="ModelRoot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0)
+mesh = SubResource("Mesh_Torso")
+
+[node name="HeadMesh" type="MeshInstance3D" parent="ModelRoot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.95, -0.05)
+mesh = SubResource("Mesh_Head")
+
+[node name="EyeMesh" type="MeshInstance3D" parent="ModelRoot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.95, -0.28)
+mesh = SubResource("Mesh_Eyes")
+
+[node name="HealthBar" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.35, 0)
+
+[node name="BarBg" type="MeshInstance3D" parent="HealthBar"]
+mesh = SubResource("Mesh_HpBg")
+
+[node name="BarFill" type="MeshInstance3D" parent="HealthBar"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.01)
+mesh = SubResource("Mesh_HpFill")
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+shape = SubResource("Shape_EnemyCollider")

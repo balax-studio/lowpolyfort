@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://cproj01bullet"]
+
+[ext_resource type="Script" path="res://scripts/projectile.gd" id="1_proj"]
+
+[sub_resource type="StandardMaterial3D" id="Mat_Bullet"]
+albedo_color = Color(1, 0.85, 0.2, 1)
+emission_enabled = true
+emission = Color(1, 0.75, 0.1, 1)
+emission_energy_multiplier = 3.0
+
+[sub_resource type="BoxMesh" id="Mesh_Bullet"]
+material = SubResource("Mat_Bullet")
+size = Vector3(0.12, 0.12, 0.35)
+
+[node name="Projectile" type="Node3D" groups=["projectiles"]]
+script = ExtResource("1_proj")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_Bullet")
