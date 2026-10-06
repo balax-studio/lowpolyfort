@@ -41,7 +41,7 @@ func get_slot_at_index(idx: int) -> Node3D:
 		return all_slots[idx]
 	return null
 
-func spawn_unit_on_slot(slot: Node3D, level: int = 1) -> Node:
+func spawn_unit_on_slot(slot: Node3D, level: int = 1, h_class: HeroDefinition.HeroClass = HeroDefinition.HeroClass.RIFLEMAN) -> Node:
 	if slot == null or slot.is_occupied():
 		return null
 	
@@ -54,6 +54,8 @@ func spawn_unit_on_slot(slot: Node3D, level: int = 1) -> Node:
 
 	var unit_instance = unit_scene.instantiate()
 	unit_instance.level = level
+	if unit_instance.has_method("set_hero_class"):
+		unit_instance.set_hero_class(h_class)
 	
 	# Place in World units container or on board
 	var units_parent = get_tree().get_first_node_in_group("units_container")

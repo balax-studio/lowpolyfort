@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://verification_shot_capture"]
+
+[ext_resource type="Script" path="res://scripts/capture_verification_screenshots.gd" id="1_shot"]
+
+[node name="CaptureVerificationScreenshots" type="Node"]
+script = ExtResource("1_shot")

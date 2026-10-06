@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://ctestphase1701"]
+
+[ext_resource type="Script" path="res://tests/test_phase17_master_regression_runner.gd" id="1_test"]
+
+[node name="TestPhase17Runner" type="Node"]
+script = ExtResource("1_test")

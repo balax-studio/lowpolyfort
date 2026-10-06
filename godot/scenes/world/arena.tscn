@@ -1,58 +1,149 @@
-[gd_scene load_steps=14 format=3 uid="uid://carenaworld9p2"]
+[gd_scene load_steps=32 format=3 uid="uid://carenaworld9p2"]
 
-[sub_resource type="StandardMaterial3D" id="Mat_Ground"]
-albedo_color = Color(0.24, 0.28, 0.25, 1)
+[sub_resource type="StandardMaterial3D" id="Mat_DioramaCliff"]
+albedo_color = Color(0.24, 0.22, 0.2, 1)
+roughness = 0.95
+
+[sub_resource type="BoxMesh" id="Mesh_DioramaBase"]
+material = SubResource("Mat_DioramaCliff")
+size = Vector3(18.0, 1.2, 22.0)
+
+[sub_resource type="StandardMaterial3D" id="Mat_TerrainEarth"]
+albedo_color = Color(0.42, 0.38, 0.3, 1)
+roughness = 0.92
+
+[sub_resource type="BoxMesh" id="Mesh_TerrainTop"]
+material = SubResource("Mat_TerrainEarth")
+size = Vector3(17.6, 0.08, 21.6)
+
+[sub_resource type="StandardMaterial3D" id="Mat_PlazaConcrete"]
+albedo_color = Color(0.52, 0.54, 0.56, 1)
+roughness = 0.82
+
+[sub_resource type="CylinderMesh" id="Mesh_CentralPlaza"]
+material = SubResource("Mat_PlazaConcrete")
+top_radius = 3.35
+bottom_radius = 3.4
+height = 0.05
+radial_segments = 8
+
+[sub_resource type="StandardMaterial3D" id="Mat_RadialSeam"]
+albedo_color = Color(0.36, 0.38, 0.4, 1)
 roughness = 0.9
 
-[sub_resource type="BoxMesh" id="Mesh_DioramaGround"]
-material = SubResource("Mat_Ground")
-size = Vector3(20, 0.5, 24)
+[sub_resource type="BoxMesh" id="Mesh_RadialLine"]
+material = SubResource("Mat_RadialSeam")
+size = Vector3(0.04, 0.052, 2.6)
 
-[sub_resource type="StandardMaterial3D" id="Mat_PlatformSlab"]
-albedo_color = Color(0.28, 0.32, 0.36, 1)
-roughness = 0.85
+[sub_resource type="StandardMaterial3D" id="Mat_FoliageGrass"]
+albedo_color = Color(0.26, 0.42, 0.2, 1)
+roughness = 0.9
 
-[sub_resource type="BoxMesh" id="Mesh_PlatformSlab"]
-material = SubResource("Mat_PlatformSlab")
-size = Vector3(7.4, 0.1, 7.4)
+[sub_resource type="PrismMesh" id="Mesh_GrassTuft"]
+material = SubResource("Mat_FoliageGrass")
+size = Vector3(0.28, 0.38, 0.12)
+
+[sub_resource type="StandardMaterial3D" id="Mat_BasaltRock"]
+albedo_color = Color(0.38, 0.4, 0.42, 1)
+roughness = 0.95
+
+[sub_resource type="SphereMesh" id="Mesh_BasaltRock"]
+material = SubResource("Mat_BasaltRock")
+radius = 0.55
+height = 0.85
+radial_segments = 6
+rings = 3
+
+[sub_resource type="StandardMaterial3D" id="Mat_MilitaryCrate"]
+albedo_color = Color(0.46, 0.38, 0.26, 1)
+roughness = 0.75
+
+[sub_resource type="BoxMesh" id="Mesh_SupplyCrate"]
+material = SubResource("Mat_MilitaryCrate")
+size = Vector3(0.55, 0.5, 0.55)
 
 [sub_resource type="StandardMaterial3D" id="Mat_Sandbag"]
-albedo_color = Color(0.68, 0.62, 0.45, 1)
+albedo_color = Color(0.65, 0.58, 0.44, 1)
 roughness = 0.9
 
 [sub_resource type="BoxMesh" id="Mesh_Sandbag"]
 material = SubResource("Mat_Sandbag")
-size = Vector3(1.2, 0.35, 0.5)
+size = Vector3(0.9, 0.28, 0.38)
 
-[sub_resource type="StandardMaterial3D" id="Mat_Crate"]
-albedo_color = Color(0.48, 0.36, 0.22, 1)
-roughness = 0.8
+[sub_resource type="StandardMaterial3D" id="Mat_HazardYellow"]
+albedo_color = Color(0.92, 0.75, 0.12, 1)
+roughness = 0.5
 
-[sub_resource type="BoxMesh" id="Mesh_Crate"]
-material = SubResource("Mat_Crate")
-size = Vector3(0.7, 0.7, 0.7)
+[sub_resource type="BoxMesh" id="Mesh_HazardBarrier"]
+material = SubResource("Mat_HazardYellow")
+size = Vector3(1.1, 0.38, 0.26)
 
-[sub_resource type="StandardMaterial3D" id="Mat_Rock"]
-albedo_color = Color(0.38, 0.40, 0.42, 1)
-roughness = 0.95
+[sub_resource type="StandardMaterial3D" id="Mat_HazardStripeBlack"]
+albedo_color = Color(0.12, 0.14, 0.16, 1)
+roughness = 0.7
 
-[sub_resource type="SphereMesh" id="Mesh_Rock"]
-material = SubResource("Mat_Rock")
-radius = 0.6
-height = 0.9
-radial_segments = 6
-rings = 4
+[sub_resource type="BoxMesh" id="Mesh_StripeBar"]
+material = SubResource("Mat_HazardStripeBlack")
+size = Vector3(0.18, 0.4, 0.28)
 
-[sub_resource type="StandardMaterial3D" id="Mat_TreePine"]
-albedo_color = Color(0.18, 0.36, 0.22, 1)
+[sub_resource type="StandardMaterial3D" id="Mat_TreeCanopy"]
+albedo_color = Color(0.2, 0.36, 0.22, 1)
 roughness = 0.9
 
-[sub_resource type="CylinderMesh" id="Mesh_PineCone"]
-material = SubResource("Mat_TreePine")
+[sub_resource type="CylinderMesh" id="Mesh_PineTier1"]
+material = SubResource("Mat_TreeCanopy")
 top_radius = 0.05
 bottom_radius = 0.85
-height = 1.8
+height = 1.6
 radial_segments = 5
+
+[sub_resource type="CylinderMesh" id="Mesh_PineTier2"]
+material = SubResource("Mat_TreeCanopy")
+top_radius = 0.02
+bottom_radius = 0.55
+height = 1.3
+radial_segments = 5
+
+[sub_resource type="StandardMaterial3D" id="Mat_TruckOlive"]
+albedo_color = Color(0.28, 0.35, 0.24, 1)
+roughness = 0.75
+
+[sub_resource type="BoxMesh" id="Mesh_TruckCab"]
+material = SubResource("Mat_TruckOlive")
+size = Vector3(0.9, 0.8, 0.9)
+
+[sub_resource type="BoxMesh" id="Mesh_TruckBed"]
+material = SubResource("Mat_TruckOlive")
+size = Vector3(0.86, 0.7, 1.3)
+
+[sub_resource type="StandardMaterial3D" id="Mat_WatchtowerWood"]
+albedo_color = Color(0.38, 0.28, 0.18, 1)
+roughness = 0.9
+
+[sub_resource type="CylinderMesh" id="Mesh_TowerStilt"]
+material = SubResource("Mat_WatchtowerWood")
+top_radius = 0.06
+bottom_radius = 0.08
+height = 2.4
+radial_segments = 4
+
+[sub_resource type="BoxMesh" id="Mesh_TowerDeck"]
+material = SubResource("Mat_WatchtowerWood")
+size = Vector3(1.2, 0.12, 1.2)
+
+[sub_resource type="BoxMesh" id="Mesh_TowerHut"]
+material = SubResource("Mat_WatchtowerWood")
+size = Vector3(0.9, 0.9, 0.9)
+
+[sub_resource type="StandardMaterial3D" id="Mat_LanternWarm"]
+albedo_color = Color(1.0, 0.8, 0.25, 1)
+emission_enabled = true
+emission = Color(1.0, 0.8, 0.25, 1)
+emission_energy_multiplier = 2.5
+
+[sub_resource type="BoxMesh" id="Mesh_Lantern"]
+material = SubResource("Mat_LanternWarm")
+size = Vector3(0.18, 0.24, 0.18)
 
 [sub_resource type="BoxShape3D" id="Shape_GroundCollider"]
 size = Vector3(30, 0.5, 30)
@@ -60,12 +151,50 @@ size = Vector3(30, 0.5, 30)
 [node name="Arena" type="Node3D"]
 
 [node name="GroundMesh" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
-mesh = SubResource("Mesh_DioramaGround")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.6, 0)
+mesh = SubResource("Mesh_DioramaBase")
+
+[node name="TerrainTop" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01, 0)
+mesh = SubResource("Mesh_TerrainTop")
 
 [node name="PlatformSlab" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.02, 0)
-mesh = SubResource("Mesh_PlatformSlab")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.035, 0)
+mesh = SubResource("Mesh_CentralPlaza")
+
+[node name="RadialSeams" type="Node3D" parent="PlatformSlab"]
+
+[node name="Seam0" type="MeshInstance3D" parent="PlatformSlab/RadialSeams"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.002, 1.8)
+mesh = SubResource("Mesh_RadialLine")
+
+[node name="Seam1" type="MeshInstance3D" parent="PlatformSlab/RadialSeams"]
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 1.27, 0.002, 1.27)
+mesh = SubResource("Mesh_RadialLine")
+
+[node name="Seam2" type="MeshInstance3D" parent="PlatformSlab/RadialSeams"]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 1.8, 0.002, 0)
+mesh = SubResource("Mesh_RadialLine")
+
+[node name="Seam3" type="MeshInstance3D" parent="PlatformSlab/RadialSeams"]
+transform = Transform3D(-0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, -0.707107, 1.27, 0.002, -1.27)
+mesh = SubResource("Mesh_RadialLine")
+
+[node name="Seam4" type="MeshInstance3D" parent="PlatformSlab/RadialSeams"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.002, -1.8)
+mesh = SubResource("Mesh_RadialLine")
+
+[node name="Seam5" type="MeshInstance3D" parent="PlatformSlab/RadialSeams"]
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, -1.27, 0.002, -1.27)
+mesh = SubResource("Mesh_RadialLine")
+
+[node name="Seam6" type="MeshInstance3D" parent="PlatformSlab/RadialSeams"]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -1.8, 0.002, 0)
+mesh = SubResource("Mesh_RadialLine")
+
+[node name="Seam7" type="MeshInstance3D" parent="PlatformSlab/RadialSeams"]
+transform = Transform3D(-0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, -0.707107, -1.27, 0.002, 1.27)
+mesh = SubResource("Mesh_RadialLine")
 
 [node name="GroundPlaneBody" type="StaticBody3D" parent="." groups=["ground"]]
 collision_layer = 8
@@ -77,54 +206,200 @@ shape = SubResource("Shape_GroundCollider")
 
 [node name="Decorations" type="Node3D" parent="."]
 
-[node name="SandbagNW" type="MeshInstance3D" parent="Decorations"]
-transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, -4.6, 0.17, -4.8)
-mesh = SubResource("Mesh_Sandbag")
+[node name="WatchtowerNW" type="Node3D" parent="Decorations"]
+transform = Transform3D(0.965926, 0, 0.258819, 0, 1, 0, -0.258819, 0, 0.965926, -3.4, 0, -6.6)
 
-[node name="SandbagNE" type="MeshInstance3D" parent="Decorations"]
-transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 4.6, 0.17, -4.8)
-mesh = SubResource("Mesh_Sandbag")
+[node name="Leg1" type="MeshInstance3D" parent="Decorations/WatchtowerNW"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, 1.2, -0.4)
+mesh = SubResource("Mesh_TowerStilt")
+
+[node name="Leg2" type="MeshInstance3D" parent="Decorations/WatchtowerNW"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 1.2, -0.4)
+mesh = SubResource("Mesh_TowerStilt")
+
+[node name="Leg3" type="MeshInstance3D" parent="Decorations/WatchtowerNW"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, 1.2, 0.4)
+mesh = SubResource("Mesh_TowerStilt")
+
+[node name="Leg4" type="MeshInstance3D" parent="Decorations/WatchtowerNW"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 1.2, 0.4)
+mesh = SubResource("Mesh_TowerStilt")
+
+[node name="Deck" type="MeshInstance3D" parent="Decorations/WatchtowerNW"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.4, 0)
+mesh = SubResource("Mesh_TowerDeck")
+
+[node name="Hut" type="MeshInstance3D" parent="Decorations/WatchtowerNW"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.85, 0)
+mesh = SubResource("Mesh_TowerHut")
+
+[node name="Lantern" type="MeshInstance3D" parent="Decorations/WatchtowerNW"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.45, 2.6, 0.45)
+mesh = SubResource("Mesh_Lantern")
+
+[node name="SupplyTruckNE" type="Node3D" parent="Decorations"]
+transform = Transform3D(0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, 3.4, 0, -6.6)
+
+[node name="Cab" type="MeshInstance3D" parent="Decorations/SupplyTruckNE"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, -0.45)
+mesh = SubResource("Mesh_TruckCab")
+
+[node name="Bed" type="MeshInstance3D" parent="Decorations/SupplyTruckNE"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0.55)
+mesh = SubResource("Mesh_TruckBed")
+
+[node name="BarrierNW" type="Node3D" parent="Decorations"]
+transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, -2.6, 0.19, -5.6)
+
+[node name="Base" type="MeshInstance3D" parent="Decorations/BarrierNW"]
+mesh = SubResource("Mesh_HazardBarrier")
+
+[node name="Stripe1" type="MeshInstance3D" parent="Decorations/BarrierNW"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.25, 0, 0)
+mesh = SubResource("Mesh_StripeBar")
+
+[node name="Stripe2" type="MeshInstance3D" parent="Decorations/BarrierNW"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 0, 0)
+mesh = SubResource("Mesh_StripeBar")
+
+[node name="BarrierNE" type="Node3D" parent="Decorations"]
+transform = Transform3D(0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, 2.6, 0.19, -5.6)
+
+[node name="Base" type="MeshInstance3D" parent="Decorations/BarrierNE"]
+mesh = SubResource("Mesh_HazardBarrier")
+
+[node name="Stripe1" type="MeshInstance3D" parent="Decorations/BarrierNE"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.25, 0, 0)
+mesh = SubResource("Mesh_StripeBar")
+
+[node name="Stripe2" type="MeshInstance3D" parent="Decorations/BarrierNE"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 0, 0)
+mesh = SubResource("Mesh_StripeBar")
+
+[node name="PineTreeL1" type="Node3D" parent="Decorations"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.6, 0, -8.0)
+
+[node name="T1" type="MeshInstance3D" parent="Decorations/PineTreeL1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+mesh = SubResource("Mesh_PineTier1")
+
+[node name="T2" type="MeshInstance3D" parent="Decorations/PineTreeL1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0)
+mesh = SubResource("Mesh_PineTier2")
+
+[node name="PineTreeR1" type="Node3D" parent="Decorations"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.6, 0, -8.0)
+
+[node name="T1" type="MeshInstance3D" parent="Decorations/PineTreeR1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+mesh = SubResource("Mesh_PineTier1")
+
+[node name="T2" type="MeshInstance3D" parent="Decorations/PineTreeR1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0)
+mesh = SubResource("Mesh_PineTier2")
+
+[node name="PineTreeNorth1" type="Node3D" parent="Decorations"]
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, -1.4, 0, -9.6)
+
+[node name="T1" type="MeshInstance3D" parent="Decorations/PineTreeNorth1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+mesh = SubResource("Mesh_PineTier1")
+
+[node name="T2" type="MeshInstance3D" parent="Decorations/PineTreeNorth1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0)
+mesh = SubResource("Mesh_PineTier2")
+
+[node name="PineTreeNorth2" type="Node3D" parent="Decorations"]
+transform = Transform3D(1.3, 0, 0, 0, 1.3, 0, 0, 0, 1.3, 0.8, 0, -9.8)
+
+[node name="T1" type="MeshInstance3D" parent="Decorations/PineTreeNorth2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+mesh = SubResource("Mesh_PineTier1")
+
+[node name="T2" type="MeshInstance3D" parent="Decorations/PineTreeNorth2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0)
+mesh = SubResource("Mesh_PineTier2")
+
+[node name="PineTreeNorth3" type="Node3D" parent="Decorations"]
+transform = Transform3D(1.1, 0, 0, 0, 1.1, 0, 0, 0, 1.1, -3.2, 0, -9.2)
+
+[node name="T1" type="MeshInstance3D" parent="Decorations/PineTreeNorth3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+mesh = SubResource("Mesh_PineTier1")
+
+[node name="T2" type="MeshInstance3D" parent="Decorations/PineTreeNorth3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0)
+mesh = SubResource("Mesh_PineTier2")
+
+[node name="PineTreeNorth4" type="Node3D" parent="Decorations"]
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 2.8, 0, -9.4)
+
+[node name="T1" type="MeshInstance3D" parent="Decorations/PineTreeNorth4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+mesh = SubResource("Mesh_PineTier1")
+
+[node name="T2" type="MeshInstance3D" parent="Decorations/PineTreeNorth4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0)
+mesh = SubResource("Mesh_PineTier2")
+
+[node name="PineTreeNorth5" type="Node3D" parent="Decorations"]
+transform = Transform3D(1.4, 0, 0, 0, 1.4, 0, 0, 0, 1.4, -5.2, 0, -8.5)
+
+[node name="T1" type="MeshInstance3D" parent="Decorations/PineTreeNorth5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+mesh = SubResource("Mesh_PineTier1")
+
+[node name="T2" type="MeshInstance3D" parent="Decorations/PineTreeNorth5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0)
+mesh = SubResource("Mesh_PineTier2")
+
+[node name="PineTreeNorth6" type="Node3D" parent="Decorations"]
+transform = Transform3D(1.4, 0, 0, 0, 1.4, 0, 0, 0, 1.4, 5.0, 0, -8.5)
+
+[node name="T1" type="MeshInstance3D" parent="Decorations/PineTreeNorth6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+mesh = SubResource("Mesh_PineTier1")
+
+[node name="T2" type="MeshInstance3D" parent="Decorations/PineTreeNorth6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0)
+mesh = SubResource("Mesh_PineTier2")
+
+[node name="CratesWest" type="MeshInstance3D" parent="Decorations"]
+transform = Transform3D(0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, 0.965926, -3.5, 0.25, -2.4)
+mesh = SubResource("Mesh_SupplyCrate")
+
+[node name="CratesEast" type="MeshInstance3D" parent="Decorations"]
+transform = Transform3D(0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, 3.5, 0.25, -2.4)
+mesh = SubResource("Mesh_SupplyCrate")
 
 [node name="SandbagSW" type="MeshInstance3D" parent="Decorations"]
-transform = Transform3D(0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, 0.965926, -4.5, 0.17, 4.6)
+transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, -3.3, 0.14, 4.2)
 mesh = SubResource("Mesh_Sandbag")
 
 [node name="SandbagSE" type="MeshInstance3D" parent="Decorations"]
-transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, 4.5, 0.17, 4.6)
+transform = Transform3D(0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, 3.3, 0.14, 4.2)
 mesh = SubResource("Mesh_Sandbag")
 
-[node name="CrateGroup1" type="MeshInstance3D" parent="Decorations"]
-transform = Transform3D(0.965926, 0, 0.258819, 0, 1, 0, -0.258819, 0, 0.965926, -5.2, 0.35, -2.5)
-mesh = SubResource("Mesh_Crate")
-
-[node name="CrateGroup2" type="MeshInstance3D" parent="Decorations"]
-transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 5.4, 0.35, -2.0)
-mesh = SubResource("Mesh_Crate")
-
-[node name="RockNW" type="MeshInstance3D" parent="Decorations"]
-transform = Transform3D(1.2, 0, 0, 0, 0.9, 0, 0, 0, 1.1, -6.5, 0.2, -6.5)
-mesh = SubResource("Mesh_Rock")
-
-[node name="RockNE" type="MeshInstance3D" parent="Decorations"]
-transform = Transform3D(1.1, 0, 0.3, 0, 1.0, 0, -0.3, 0, 1.2, 6.5, 0.2, -7.0)
-mesh = SubResource("Mesh_Rock")
-
 [node name="RockSW" type="MeshInstance3D" parent="Decorations"]
-transform = Transform3D(1.0, 0, 0, 0, 0.8, 0, 0, 0, 0.9, -6.2, 0.2, 6.8)
-mesh = SubResource("Mesh_Rock")
+transform = Transform3D(1.1, 0, 0, 0, 0.9, 0, 0, 0, 1.1, -3.4, 0.28, 5.0)
+mesh = SubResource("Mesh_BasaltRock")
 
-[node name="PineTree1" type="MeshInstance3D" parent="Decorations"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.0, 0.9, -4.5)
-mesh = SubResource("Mesh_PineCone")
+[node name="RockSE" type="MeshInstance3D" parent="Decorations"]
+transform = Transform3D(1.1, 0, 0, 0, 0.9, 0, 0, 0, 1.1, 3.4, 0.28, 5.0)
+mesh = SubResource("Mesh_BasaltRock")
 
-[node name="PineTree2" type="MeshInstance3D" parent="Decorations"]
-transform = Transform3D(1.2, 0, 0, 0, 1.3, 0, 0, 0, 1.2, 7.2, 1.1, -5.0)
-mesh = SubResource("Mesh_PineCone")
+[node name="Grass1" type="MeshInstance3D" parent="Decorations"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.8, 0.19, -3.8)
+mesh = SubResource("Mesh_GrassTuft")
 
-[node name="PineTree3" type="MeshInstance3D" parent="Decorations"]
-transform = Transform3D(0.9, 0, 0, 0, 1.0, 0, 0, 0, 0.9, -7.2, 0.8, 4.0)
-mesh = SubResource("Mesh_PineCone")
+[node name="Grass2" type="MeshInstance3D" parent="Decorations"]
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 2.8, 0.19, -3.8)
+mesh = SubResource("Mesh_GrassTuft")
 
-[node name="PineTree4" type="MeshInstance3D" parent="Decorations"]
-transform = Transform3D(1.1, 0, 0, 0, 1.1, 0, 0, 0, 1.1, 7.0, 1.0, 5.5)
-mesh = SubResource("Mesh_PineCone")
+[node name="Grass3" type="MeshInstance3D" parent="Decorations"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6, 0.19, 3.6)
+mesh = SubResource("Mesh_GrassTuft")
+
+[node name="Grass4" type="MeshInstance3D" parent="Decorations"]
+transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, 2.6, 0.19, 3.6)
+mesh = SubResource("Mesh_GrassTuft")

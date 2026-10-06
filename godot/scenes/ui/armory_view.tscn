@@ -1,0 +1,556 @@
+[gd_scene load_steps=8 format=3 uid="uid://carmoryview01"]
+
+[ext_resource type="Script" path="res://scripts/armory_view.gd" id="1_armory"]
+
+[sub_resource type="StyleBoxFlat" id="Style_ArmoryCard"]
+bg_color = Color(0.12, 0.14, 0.19, 0.98)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 4
+border_color = Color(0.04, 0.04, 0.05, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+shadow_color = Color(0, 0, 0, 0.6)
+shadow_size = 4
+shadow_offset = Vector2(3, 3)
+
+[sub_resource type="StyleBoxFlat" id="Style_IconBox"]
+bg_color = Color(0.2, 0.6, 0.85, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.05, 0.05, 0.05, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="Style_BadgeBlue"]
+bg_color = Color(0.18, 0.48, 0.92, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.05, 0.05, 0.05, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="Style_BadgeLime"]
+bg_color = Color(0.4, 0.85, 0.45, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.05, 0.05, 0.05, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="Style_BackBtn"]
+bg_color = Color(0.85, 0.96, 0.22, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 4
+border_color = Color(0.05, 0.05, 0.05, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+shadow_color = Color(0, 0, 0, 1)
+shadow_size = 0
+shadow_offset = Vector2(0, 3)
+
+[sub_resource type="StyleBoxFlat" id="Style_StatusBadge"]
+bg_color = Color(0.4, 0.85, 0.45, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.05, 0.05, 0.05, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[node name="ArmoryView" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_armory")
+
+[node name="Dimmer" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.05, 0.06, 0.08, 0.94)
+
+[node name="SafeContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 32
+
+[node name="VBox" type="VBoxContainer" parent="SafeContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Header" type="HBoxContainer" parent="SafeContainer/VBox"]
+layout_mode = 2
+alignment = 1
+
+[node name="TitleBadge" type="PanelContainer" parent="SafeContainer/VBox/Header"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("Style_BadgeBlue")
+
+[node name="Margin" type="MarginContainer" parent="SafeContainer/VBox/Header/TitleBadge"]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 6
+
+[node name="Label" type="Label" parent="SafeContainer/VBox/Header/TitleBadge/Margin"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 15
+text = "🛡️ DEFENDER ARMORY"
+
+[node name="Spacer" type="Control" parent="SafeContainer/VBox/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="BestWaveBadge" type="PanelContainer" parent="SafeContainer/VBox/Header"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("Style_BadgeLime")
+
+[node name="Margin" type="MarginContainer" parent="SafeContainer/VBox/Header/BestWaveBadge"]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 6
+
+[node name="Label" type="Label" parent="SafeContainer/VBox/Header/BestWaveBadge/Margin"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.05, 0.05, 0.05, 1)
+theme_override_font_sizes/font_size = 13
+text = "BEST WAVE: 1"
+
+[node name="Scroll" type="ScrollContainer" parent="SafeContainer/VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="CardsContainer" type="VBoxContainer" parent="SafeContainer/VBox/Scroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 12
+
+[node name="RiflemanCard" type="PanelContainer" parent="SafeContainer/VBox/Scroll/CardsContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("Style_ArmoryCard")
+
+[node name="Margin" type="MarginContainer" parent="SafeContainer/VBox/Scroll/CardsContainer/RiflemanCard"]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="HBox" type="HBoxContainer" parent="SafeContainer/VBox/Scroll/CardsContainer/RiflemanCard/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="IconBox" type="PanelContainer" parent="SafeContainer/VBox/Scroll/CardsContainer/RiflemanCard/Margin/HBox"]
+custom_minimum_size = Vector2(56, 56)
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("Style_IconBox")
+
+[node name="Label" type="Label" parent="SafeContainer/VBox/Scroll/CardsContainer/RiflemanCard/Margin/HBox/IconBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "🎯"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="InfoVBox" type="VBoxContainer" parent="SafeContainer/VBox/Scroll/CardsContainer/RiflemanCard/Margin/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 4
+
+[node name="HeaderRow" type="HBoxContainer" parent="SafeContainer/VBox/Scroll/CardsContainer/RiflemanCard/Margin/HBox/InfoVBox"]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="SafeContainer/VBox/Scroll/CardsContainer/RiflemanCard/Margin/HBox/InfoVBox/HeaderRow"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 15
+text = "RIFLEMAN"
+
+[node name="Spacer" type="Control" parent="SafeContainer/VBox/Scroll/CardsContainer/RiflemanCard/Margin/HBox/InfoVBox/HeaderRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="StatusBadge" type="PanelContainer" parent="SafeContainer/VBox/Scroll/CardsContainer/RiflemanCard/Margin/HBox/InfoVBox/HeaderRow"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("Style_StatusBadge")
+
+[node name="Margin" type="MarginContainer" parent="SafeContainer/VBox/Scroll/CardsContainer/RiflemanCard/Margin/HBox/InfoVBox/HeaderRow/StatusBadge"]
+layout_mode = 2
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = 2
+
+[node name="Label" type="Label" parent="SafeContainer/VBox/Scroll/CardsContainer/RiflemanCard/Margin/HBox/InfoVBox/HeaderRow/StatusBadge/Margin"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.05, 0.05, 0.05, 1)
+theme_override_font_sizes/font_size = 9
+text = "UNLOCKED"
+
+[node name="DescLabel" type="Label" parent="SafeContainer/VBox/Scroll/CardsContainer/RiflemanCard/Margin/HBox/InfoVBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.72, 0.78, 0.85, 1)
+theme_override_font_sizes/font_size = 11
+text = "Balanced baseline sharpshooter."
+autowrap_mode = 2
+
+[node name="StatsBox" type="HBoxContainer" parent="SafeContainer/VBox/Scroll/CardsContainer/RiflemanCard/Margin/HBox/InfoVBox"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="DmgLabel" type="Label" parent="SafeContainer/VBox/Scroll/CardsContainer/RiflemanCard/Margin/HBox/InfoVBox/StatsBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.96, 0.88, 0.37, 1)
+theme_override_font_sizes/font_size = 10
+text = "DMG: 12"
+
+[node name="SpdLabel" type="Label" parent="SafeContainer/VBox/Scroll/CardsContainer/RiflemanCard/Margin/HBox/InfoVBox/StatsBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.96, 0.88, 0.37, 1)
+theme_override_font_sizes/font_size = 10
+text = "SPD: 1.2/s"
+
+[node name="RngLabel" type="Label" parent="SafeContainer/VBox/Scroll/CardsContainer/RiflemanCard/Margin/HBox/InfoVBox/StatsBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.96, 0.88, 0.37, 1)
+theme_override_font_sizes/font_size = 10
+text = "RNG: 7.5m"
+
+[node name="ShotgunnerCard" type="PanelContainer" parent="SafeContainer/VBox/Scroll/CardsContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("Style_ArmoryCard")
+
+[node name="Margin" type="MarginContainer" parent="SafeContainer/VBox/Scroll/CardsContainer/ShotgunnerCard"]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="HBox" type="HBoxContainer" parent="SafeContainer/VBox/Scroll/CardsContainer/ShotgunnerCard/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="IconBox" type="PanelContainer" parent="SafeContainer/VBox/Scroll/CardsContainer/ShotgunnerCard/Margin/HBox"]
+custom_minimum_size = Vector2(56, 56)
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("Style_IconBox")
+
+[node name="Label" type="Label" parent="SafeContainer/VBox/Scroll/CardsContainer/ShotgunnerCard/Margin/HBox/IconBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "💥"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="InfoVBox" type="VBoxContainer" parent="SafeContainer/VBox/Scroll/CardsContainer/ShotgunnerCard/Margin/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 4
+
+[node name="HeaderRow" type="HBoxContainer" parent="SafeContainer/VBox/Scroll/CardsContainer/ShotgunnerCard/Margin/HBox/InfoVBox"]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="SafeContainer/VBox/Scroll/CardsContainer/ShotgunnerCard/Margin/HBox/InfoVBox/HeaderRow"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 15
+text = "SHOTGUNNER"
+
+[node name="Spacer" type="Control" parent="SafeContainer/VBox/Scroll/CardsContainer/ShotgunnerCard/Margin/HBox/InfoVBox/HeaderRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="StatusBadge" type="PanelContainer" parent="SafeContainer/VBox/Scroll/CardsContainer/ShotgunnerCard/Margin/HBox/InfoVBox/HeaderRow"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("Style_StatusBadge")
+
+[node name="Margin" type="MarginContainer" parent="SafeContainer/VBox/Scroll/CardsContainer/ShotgunnerCard/Margin/HBox/InfoVBox/HeaderRow/StatusBadge"]
+layout_mode = 2
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = 2
+
+[node name="Label" type="Label" parent="SafeContainer/VBox/Scroll/CardsContainer/ShotgunnerCard/Margin/HBox/InfoVBox/HeaderRow/StatusBadge/Margin"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.05, 0.05, 0.05, 1)
+theme_override_font_sizes/font_size = 9
+text = "WAVE 5"
+
+[node name="DescLabel" type="Label" parent="SafeContainer/VBox/Scroll/CardsContainer/ShotgunnerCard/Margin/HBox/InfoVBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.72, 0.78, 0.85, 1)
+theme_override_font_sizes/font_size = 11
+text = "SURVIVE TO WAVE 5 TO DEPLOY THIS SPECIALIST."
+autowrap_mode = 2
+
+[node name="StatsBox" type="HBoxContainer" parent="SafeContainer/VBox/Scroll/CardsContainer/ShotgunnerCard/Margin/HBox/InfoVBox"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="DmgLabel" type="Label" parent="SafeContainer/VBox/Scroll/CardsContainer/ShotgunnerCard/Margin/HBox/InfoVBox/StatsBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.96, 0.88, 0.37, 1)
+theme_override_font_sizes/font_size = 10
+text = "DMG: 6x5"
+
+[node name="SpdLabel" type="Label" parent="SafeContainer/VBox/Scroll/CardsContainer/ShotgunnerCard/Margin/HBox/InfoVBox/StatsBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.96, 0.88, 0.37, 1)
+theme_override_font_sizes/font_size = 10
+text = "SPD: 0.8/s"
+
+[node name="RngLabel" type="Label" parent="SafeContainer/VBox/Scroll/CardsContainer/ShotgunnerCard/Margin/HBox/InfoVBox/StatsBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.96, 0.88, 0.37, 1)
+theme_override_font_sizes/font_size = 10
+text = "RNG: 5.5m"
+
+[node name="SniperCard" type="PanelContainer" parent="SafeContainer/VBox/Scroll/CardsContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("Style_ArmoryCard")
+
+[node name="Margin" type="MarginContainer" parent="SafeContainer/VBox/Scroll/CardsContainer/SniperCard"]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="HBox" type="HBoxContainer" parent="SafeContainer/VBox/Scroll/CardsContainer/SniperCard/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="IconBox" type="PanelContainer" parent="SafeContainer/VBox/Scroll/CardsContainer/SniperCard/Margin/HBox"]
+custom_minimum_size = Vector2(56, 56)
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("Style_IconBox")
+
+[node name="Label" type="Label" parent="SafeContainer/VBox/Scroll/CardsContainer/SniperCard/Margin/HBox/IconBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "🔭"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="InfoVBox" type="VBoxContainer" parent="SafeContainer/VBox/Scroll/CardsContainer/SniperCard/Margin/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 4
+
+[node name="HeaderRow" type="HBoxContainer" parent="SafeContainer/VBox/Scroll/CardsContainer/SniperCard/Margin/HBox/InfoVBox"]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="SafeContainer/VBox/Scroll/CardsContainer/SniperCard/Margin/HBox/InfoVBox/HeaderRow"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 15
+text = "SNIPER"
+
+[node name="Spacer" type="Control" parent="SafeContainer/VBox/Scroll/CardsContainer/SniperCard/Margin/HBox/InfoVBox/HeaderRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="StatusBadge" type="PanelContainer" parent="SafeContainer/VBox/Scroll/CardsContainer/SniperCard/Margin/HBox/InfoVBox/HeaderRow"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("Style_StatusBadge")
+
+[node name="Margin" type="MarginContainer" parent="SafeContainer/VBox/Scroll/CardsContainer/SniperCard/Margin/HBox/InfoVBox/HeaderRow/StatusBadge"]
+layout_mode = 2
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = 2
+
+[node name="Label" type="Label" parent="SafeContainer/VBox/Scroll/CardsContainer/SniperCard/Margin/HBox/InfoVBox/HeaderRow/StatusBadge/Margin"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.05, 0.05, 0.05, 1)
+theme_override_font_sizes/font_size = 9
+text = "WAVE 10"
+
+[node name="DescLabel" type="Label" parent="SafeContainer/VBox/Scroll/CardsContainer/SniperCard/Margin/HBox/InfoVBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.72, 0.78, 0.85, 1)
+theme_override_font_sizes/font_size = 11
+text = "SURVIVE TO WAVE 10 TO DEPLOY THIS SPECIALIST."
+autowrap_mode = 2
+
+[node name="StatsBox" type="HBoxContainer" parent="SafeContainer/VBox/Scroll/CardsContainer/SniperCard/Margin/HBox/InfoVBox"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="DmgLabel" type="Label" parent="SafeContainer/VBox/Scroll/CardsContainer/SniperCard/Margin/HBox/InfoVBox/StatsBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.96, 0.88, 0.37, 1)
+theme_override_font_sizes/font_size = 10
+text = "DMG: 45"
+
+[node name="SpdLabel" type="Label" parent="SafeContainer/VBox/Scroll/CardsContainer/SniperCard/Margin/HBox/InfoVBox/StatsBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.96, 0.88, 0.37, 1)
+theme_override_font_sizes/font_size = 10
+text = "SPD: 0.5/s"
+
+[node name="RngLabel" type="Label" parent="SafeContainer/VBox/Scroll/CardsContainer/SniperCard/Margin/HBox/InfoVBox/StatsBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.96, 0.88, 0.37, 1)
+theme_override_font_sizes/font_size = 10
+text = "RNG: 12.0m"
+
+[node name="HeavyGunnerCard" type="PanelContainer" parent="SafeContainer/VBox/Scroll/CardsContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("Style_ArmoryCard")
+
+[node name="Margin" type="MarginContainer" parent="SafeContainer/VBox/Scroll/CardsContainer/HeavyGunnerCard"]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="HBox" type="HBoxContainer" parent="SafeContainer/VBox/Scroll/CardsContainer/HeavyGunnerCard/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="IconBox" type="PanelContainer" parent="SafeContainer/VBox/Scroll/CardsContainer/HeavyGunnerCard/Margin/HBox"]
+custom_minimum_size = Vector2(56, 56)
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("Style_IconBox")
+
+[node name="Label" type="Label" parent="SafeContainer/VBox/Scroll/CardsContainer/HeavyGunnerCard/Margin/HBox/IconBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "⚡"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="InfoVBox" type="VBoxContainer" parent="SafeContainer/VBox/Scroll/CardsContainer/HeavyGunnerCard/Margin/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 4
+
+[node name="HeaderRow" type="HBoxContainer" parent="SafeContainer/VBox/Scroll/CardsContainer/HeavyGunnerCard/Margin/HBox/InfoVBox"]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="SafeContainer/VBox/Scroll/CardsContainer/HeavyGunnerCard/Margin/HBox/InfoVBox/HeaderRow"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 15
+text = "HEAVY GUNNER"
+
+[node name="Spacer" type="Control" parent="SafeContainer/VBox/Scroll/CardsContainer/HeavyGunnerCard/Margin/HBox/InfoVBox/HeaderRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="StatusBadge" type="PanelContainer" parent="SafeContainer/VBox/Scroll/CardsContainer/HeavyGunnerCard/Margin/HBox/InfoVBox/HeaderRow"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("Style_StatusBadge")
+
+[node name="Margin" type="MarginContainer" parent="SafeContainer/VBox/Scroll/CardsContainer/HeavyGunnerCard/Margin/HBox/InfoVBox/HeaderRow/StatusBadge"]
+layout_mode = 2
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = 2
+
+[node name="Label" type="Label" parent="SafeContainer/VBox/Scroll/CardsContainer/HeavyGunnerCard/Margin/HBox/InfoVBox/HeaderRow/StatusBadge/Margin"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.05, 0.05, 0.05, 1)
+theme_override_font_sizes/font_size = 9
+text = "WAVE 15"
+
+[node name="DescLabel" type="Label" parent="SafeContainer/VBox/Scroll/CardsContainer/HeavyGunnerCard/Margin/HBox/InfoVBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.72, 0.78, 0.85, 1)
+theme_override_font_sizes/font_size = 11
+text = "SURVIVE TO WAVE 15 TO DEPLOY THIS SPECIALIST."
+autowrap_mode = 2
+
+[node name="StatsBox" type="HBoxContainer" parent="SafeContainer/VBox/Scroll/CardsContainer/HeavyGunnerCard/Margin/HBox/InfoVBox"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="DmgLabel" type="Label" parent="SafeContainer/VBox/Scroll/CardsContainer/HeavyGunnerCard/Margin/HBox/InfoVBox/StatsBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.96, 0.88, 0.37, 1)
+theme_override_font_sizes/font_size = 10
+text = "DMG: 8"
+
+[node name="SpdLabel" type="Label" parent="SafeContainer/VBox/Scroll/CardsContainer/HeavyGunnerCard/Margin/HBox/InfoVBox/StatsBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.96, 0.88, 0.37, 1)
+theme_override_font_sizes/font_size = 10
+text = "SPD: 2.5/s"
+
+[node name="RngLabel" type="Label" parent="SafeContainer/VBox/Scroll/CardsContainer/HeavyGunnerCard/Margin/HBox/InfoVBox/StatsBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.96, 0.88, 0.37, 1)
+theme_override_font_sizes/font_size = 10
+text = "RNG: 6.5m"
+
+[node name="BackButton" type="Button" parent="SafeContainer/VBox"]
+custom_minimum_size = Vector2(0, 52)
+layout_mode = 2
+theme_override_styles/normal = SubResource("Style_BackBtn")
+
+[node name="Label" type="Label" parent="SafeContainer/VBox/BackButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.05, 0.05, 0.05, 1)
+theme_override_font_sizes/font_size = 18
+text = "⬅ BACK TO MENU"
+horizontal_alignment = 1
+vertical_alignment = 1

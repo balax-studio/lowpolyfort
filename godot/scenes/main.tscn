@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://cmain01polyfort"]
+[gd_scene load_steps=9 format=3 uid="uid://cmain01polyfort"]
 
 [ext_resource type="PackedScene" path="res://scenes/world/arena.tscn" id="1_arena"]
 [ext_resource type="PackedScene" path="res://scenes/world/central_base.tscn" id="2_base"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://scripts/wave_manager.gd" id="6_wave"]
 [ext_resource type="PackedScene" path="res://scenes/ui/game_over_dialog.tscn" id="7_over"]
 [ext_resource type="Script" path="res://scripts/camera_controller.gd" id="8_cam"]
+[ext_resource type="PackedScene" path="res://scenes/ui/upgrade_selection_dialog.tscn" id="9_upg"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_1"]
 sky_top_color = Color(0.42, 0.65, 0.88, 1)
@@ -22,10 +23,10 @@ sky_material = SubResource("ProceduralSkyMaterial_1")
 background_mode = 2
 sky = SubResource("Sky_1")
 ambient_light_source = 2
-ambient_light_color = Color(0.6, 0.64, 0.7, 1)
-ambient_light_energy = 0.65
+ambient_light_color = Color(0.7, 0.74, 0.8, 1)
+ambient_light_energy = 0.78
 tonemap_mode = 2
-tonemap_white = 1.1
+tonemap_white = 1.15
 
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_1"]
 
@@ -50,31 +51,44 @@ tonemap_white = 1.1
 [node name="SpawnPoints" type="Node3D" parent="World"]
 
 [node name="SpawnNorth" type="Marker3D" parent="World/SpawnPoints" groups=["spawn_points"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -11)
 
 [node name="SpawnNorthEast" type="Marker3D" parent="World/SpawnPoints" groups=["spawn_points"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0, -9)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0, -7.5)
 
 [node name="SpawnEast" type="Marker3D" parent="World/SpawnPoints" groups=["spawn_points"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0, -4)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5, 0, 0)
+
+[node name="SpawnSouthEast" type="Marker3D" parent="World/SpawnPoints" groups=["spawn_points"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0, 7.5)
+
+[node name="SpawnSouth" type="Marker3D" parent="World/SpawnPoints" groups=["spawn_points"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 11)
+
+[node name="SpawnSouthWest" type="Marker3D" parent="World/SpawnPoints" groups=["spawn_points"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5, 0, 7.5)
 
 [node name="SpawnWest" type="Marker3D" parent="World/SpawnPoints" groups=["spawn_points"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5, 0, -4)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.5, 0, 0)
+
+[node name="SpawnNorthWest" type="Marker3D" parent="World/SpawnPoints" groups=["spawn_points"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5, 0, -7.5)
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.743145, 0.669131, 0, -0.669131, 0.743145, 0, 11.5, 10.5)
+transform = Transform3D(1, 0, 0, 0, 0.75471, 0.656059, 0, -0.656059, 0.75471, 0, 12.8, 11.4)
 current = true
-fov = 42.0
+fov = 42.5
 attributes = SubResource("CameraAttributesPractical_1")
 script = ExtResource("8_cam")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.819152, -0.344449, 0.458925, 0, 0.799797, 0.600271, -0.573576, -0.491712, 0.655154, 0, 12, 0)
-light_color = Color(1, 0.97, 0.92, 1)
-light_energy = 1.15
+transform = Transform3D(0.866025, 0.449397, -0.219185, 0, 0.438371, 0.898794, 0.5, -0.778377, 0.379641, -2, 12, 2)
+light_color = Color(1, 0.98, 0.94, 1)
+light_energy = 1.05
 shadow_enabled = true
-shadow_bias = 0.04
-directional_shadow_max_distance = 35.0
+shadow_bias = 0.035
+shadow_blur = 1.8
+directional_shadow_max_distance = 32.0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_1")
@@ -84,6 +98,8 @@ environment = SubResource("Environment_1")
 [node name="HUD" parent="UI" instance=ExtResource("4_hud")]
 
 [node name="GameOverDialog" parent="UI" instance=ExtResource("7_over")]
+
+[node name="UpgradeSelectionDialog" parent="UI" instance=ExtResource("9_upg")]
 
 [node name="DragController" type="Node" parent="."]
 script = ExtResource("5_drag")

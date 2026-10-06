@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://shotmainmenuv2"]
+
+[ext_resource type="Script" path="res://scripts/capture_main_menu_v2.gd" id="1_shot"]
+
+[node name="CaptureMainMenuV2" type="Node"]
+script = ExtResource("1_shot")

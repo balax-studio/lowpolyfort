@@ -1,0 +1,608 @@
+[gd_scene load_steps=29 format=3 uid="uid://b5m3x8a7q4y2p"]
+
+[ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_main_menu"]
+[ext_resource type="PackedScene" uid="uid://c8vj4m2w7y4q3" path="res://scenes/world/central_base.tscn" id="2_base"]
+[ext_resource type="PackedScene" uid="uid://carenaworld9p2" path="res://scenes/world/arena.tscn" id="2_arena"]
+[ext_resource type="PackedScene" uid="uid://cboard8x7yw2p" path="res://scenes/world/board.tscn" id="3_board"]
+[ext_resource type="PackedScene" uid="uid://c7m5yq3w2e8op" path="res://scenes/ui/mode_select_dialog.tscn" id="3_mode_dialog"]
+[ext_resource type="PackedScene" path="res://scenes/ui/armory_view.tscn" id="4_armory"]
+[ext_resource type="PackedScene" uid="uid://cunit01generic" path="res://scenes/units/unit.tscn" id="4_unit"]
+[ext_resource type="PackedScene" path="res://scenes/ui/permanent_upgrades_view.tscn" id="5_upgrades"]
+[ext_resource type="PackedScene" uid="uid://cenemy01basic" path="res://scenes/enemies/enemy.tscn" id="5_enemy"]
+[ext_resource type="PackedScene" path="res://scenes/ui/settings_dialog.tscn" id="6_settings"]
+
+[sub_resource type="Environment" id="Environment_menu"]
+background_mode = 1
+background_color = Color(0.38, 0.44, 0.48, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.72, 0.78, 0.88, 1)
+ambient_light_energy = 1.0
+tonemap_mode = 2
+
+[sub_resource type="StandardMaterial3D" id="Mat_TracerYellow"]
+albedo_color = Color(1, 0.88, 0.2, 1)
+emission_enabled = true
+emission = Color(1, 0.85, 0.15, 1)
+emission_energy_multiplier = 4.0
+
+[sub_resource type="CylinderMesh" id="Mesh_TracerLine"]
+material = SubResource("Mat_TracerYellow")
+top_radius = 0.03
+bottom_radius = 0.03
+height = 1.2
+radial_segments = 6
+
+[sub_resource type="StandardMaterial3D" id="Mat_MuzzleOrange"]
+albedo_color = Color(1, 0.6, 0.1, 1)
+emission_enabled = true
+emission = Color(1, 0.55, 0.08, 1)
+emission_energy_multiplier = 3.5
+
+[sub_resource type="CylinderMesh" id="Mesh_MuzzleFlash"]
+material = SubResource("Mat_MuzzleOrange")
+top_radius = 0.01
+bottom_radius = 0.12
+height = 0.25
+radial_segments = 6
+
+[sub_resource type="StyleBoxFlat" id="Style_CardDark"]
+bg_color = Color(0.11, 0.13, 0.17, 0.95)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.04, 0.05, 0.07, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+shadow_color = Color(0, 0, 0, 0.75)
+shadow_size = 0
+shadow_offset = Vector2(0, 4)
+
+[sub_resource type="StyleBoxFlat" id="Style_CardCream"]
+bg_color = Color(0.97, 0.96, 0.92, 0.96)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.04, 0.05, 0.07, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+shadow_color = Color(0, 0, 0, 0.75)
+shadow_size = 0
+shadow_offset = Vector2(0, 4)
+
+[sub_resource type="StyleBoxFlat" id="Style_BtnPlusGreen"]
+bg_color = Color(0.42, 0.82, 0.12, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.04, 0.05, 0.07, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="Style_PillDark"]
+bg_color = Color(0.07, 0.08, 0.11, 0.96)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.04, 0.05, 0.07, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="Style_BtnPlayNormal"]
+bg_color = Color(0.98, 0.82, 0.12, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 6
+border_color = Color(0.04, 0.05, 0.07, 1)
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+shadow_color = Color(0, 0, 0, 0.85)
+shadow_size = 0
+shadow_offset = Vector2(0, 7)
+
+[sub_resource type="StyleBoxFlat" id="Style_BtnPlayPressed"]
+bg_color = Color(0.88, 0.72, 0.08, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.04, 0.05, 0.07, 1)
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+
+[sub_resource type="StyleBoxFlat" id="Style_BtnModes"]
+bg_color = Color(0.18, 0.54, 0.96, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 5
+border_color = Color(0.04, 0.05, 0.07, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+shadow_color = Color(0, 0, 0, 0.8)
+shadow_size = 0
+shadow_offset = Vector2(0, 4)
+
+[sub_resource type="StyleBoxFlat" id="Style_BtnUpgrades"]
+bg_color = Color(0.54, 0.92, 0.15, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 5
+border_color = Color(0.04, 0.05, 0.07, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+shadow_color = Color(0, 0, 0, 0.8)
+shadow_size = 0
+shadow_offset = Vector2(0, 4)
+
+[sub_resource type="StyleBoxFlat" id="Style_BtnArmory"]
+bg_color = Color(0.94, 0.92, 0.86, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 5
+border_color = Color(0.04, 0.05, 0.07, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+shadow_color = Color(0, 0, 0, 0.8)
+shadow_size = 0
+shadow_offset = Vector2(0, 4)
+
+[sub_resource type="StyleBoxFlat" id="Style_BtnSettings"]
+bg_color = Color(0.5, 0.56, 0.65, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 5
+border_color = Color(0.04, 0.05, 0.07, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+shadow_color = Color(0, 0, 0, 0.8)
+shadow_size = 0
+shadow_offset = Vector2(0, 4)
+
+[sub_resource type="StyleBoxFlat" id="Style_BadgeNotif"]
+bg_color = Color(0.92, 0.22, 0.18, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.04, 0.05, 0.07, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_main_menu")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(540, 960)
+render_target_update_mode = 4
+
+[node name="WorldPreview" type="Node3D" parent="SubViewportContainer/SubViewport"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="SubViewportContainer/SubViewport/WorldPreview"]
+environment = SubResource("Environment_menu")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewportContainer/SubViewport/WorldPreview"]
+transform = Transform3D(0.788011, -0.383022, 0.482091, 0, 0.782608, 0.622515, -0.615661, -0.490548, 0.616703, 8, 14, 8)
+light_color = Color(1, 0.96, 0.88, 1)
+light_energy = 1.35
+shadow_enabled = true
+
+[node name="Arena" parent="SubViewportContainer/SubViewport/WorldPreview" instance=ExtResource("2_arena")]
+
+[node name="CentralBase" parent="SubViewportContainer/SubViewport/WorldPreview" instance=ExtResource("2_base")]
+
+[node name="Board" parent="SubViewportContainer/SubViewport/WorldPreview" instance=ExtResource("3_board")]
+
+[node name="PreviewDefenders" type="Node3D" parent="SubViewportContainer/SubViewport/WorldPreview"]
+process_mode = 4
+
+[node name="RiflemanNorth" parent="SubViewportContainer/SubViewport/WorldPreview/PreviewDefenders" instance=ExtResource("4_unit")]
+transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, 0, 0, -2.2)
+
+[node name="RiflemanWest" parent="SubViewportContainer/SubViewport/WorldPreview/PreviewDefenders" instance=ExtResource("4_unit")]
+transform = Transform3D(0.573576, 0, -0.819152, 0, 1, 0, 0.819152, 0, 0.573576, -2.2, 0, 0)
+level = 2
+
+[node name="RiflemanEast" parent="SubViewportContainer/SubViewport/WorldPreview/PreviewDefenders" instance=ExtResource("4_unit")]
+transform = Transform3D(0.0871557, 0, 0.996195, 0, 1, 0, -0.996195, 0, 0.0871557, 2.2, 0, 0)
+
+[node name="PreviewEnemies" type="Node3D" parent="SubViewportContainer/SubViewport/WorldPreview"]
+process_mode = 4
+
+[node name="RaiderNorth" parent="SubViewportContainer/SubViewport/WorldPreview/PreviewEnemies" instance=ExtResource("5_enemy")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, -5.8)
+
+[node name="RaiderNorthEast" parent="SubViewportContainer/SubViewport/WorldPreview/PreviewEnemies" instance=ExtResource("5_enemy")]
+transform = Transform3D(-0.857167, 0, -0.515038, 0, 1, 0, 0.515038, 0, -0.857167, 2.8, 0, -4.2)
+
+[node name="RaiderEast" parent="SubViewportContainer/SubViewport/WorldPreview/PreviewEnemies" instance=ExtResource("5_enemy")]
+transform = Transform3D(-0.0871557, 0, -0.996195, 0, 1, 0, 0.996195, 0, -0.0871557, 3.4, 0, -0.6)
+
+[node name="RaiderSouthEast" parent="SubViewportContainer/SubViewport/WorldPreview/PreviewEnemies" instance=ExtResource("5_enemy")]
+transform = Transform3D(0.857167, 0, -0.515038, 0, 1, 0, 0.515038, 0, 0.857167, 2.4, 0, 3.4)
+
+[node name="RaiderSouthWest" parent="SubViewportContainer/SubViewport/WorldPreview/PreviewEnemies" instance=ExtResource("5_enemy")]
+transform = Transform3D(0.857167, 0, 0.515038, 0, 1, 0, -0.515038, 0, 0.857167, -2.4, 0, 3.2)
+
+[node name="PreviewTracers" type="Node3D" parent="SubViewportContainer/SubViewport/WorldPreview"]
+
+[node name="Tracer1" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/WorldPreview/PreviewTracers"]
+transform = Transform3D(0.5, 0, 0.866025, 0, 1, 0, -0.866025, 0, 0.5, 1.2, 0.55, -3.1)
+mesh = SubResource("Mesh_TracerLine")
+
+[node name="Tracer2" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/WorldPreview/PreviewTracers"]
+transform = Transform3D(0.996195, 0, -0.0871557, 0, 1, 0, 0.0871557, 0, 0.996195, 2.7, 0.55, -0.3)
+mesh = SubResource("Mesh_TracerLine")
+
+[node name="FlashEast" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/WorldPreview/PreviewTracers"]
+transform = Transform3D(0.0871557, 0, 0.996195, 0, 1, 0, -0.996195, 0, 0.0871557, 2.5, 0.55, 0.05)
+mesh = SubResource("Mesh_MuzzleFlash")
+
+[node name="FlashNorth" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/WorldPreview/PreviewTracers"]
+transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, 0.25, 0.55, -2.05)
+mesh = SubResource("Mesh_MuzzleFlash")
+
+[node name="CameraPivot" type="Node3D" parent="SubViewportContainer/SubViewport/WorldPreview"]
+
+[node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport/WorldPreview/CameraPivot"]
+transform = Transform3D(1, 0, 0, 0, 0.737277, 0.67559, 0, -0.67559, 0.737277, 0, 12.8, 11.4)
+fov = 42.5
+
+[node name="UIOverlay" type="CanvasLayer" parent="."]
+
+[node name="TopContainer" type="MarginContainer" parent="UIOverlay"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 190.0
+grow_horizontal = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 18
+theme_override_constants/margin_right = 12
+
+[node name="VBox" type="VBoxContainer" parent="UIOverlay/TopContainer"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="HeaderRow" type="HBoxContainer" parent="UIOverlay/TopContainer/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="BestWaveBadge" type="PanelContainer" parent="UIOverlay/TopContainer/VBox/HeaderRow"]
+custom_minimum_size = Vector2(98, 92)
+layout_mode = 2
+theme_override_styles/panel = SubResource("Style_CardDark")
+
+[node name="Margin" type="MarginContainer" parent="UIOverlay/TopContainer/VBox/HeaderRow/BestWaveBadge"]
+layout_mode = 2
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = 8
+
+[node name="VBox" type="VBoxContainer" parent="UIOverlay/TopContainer/VBox/HeaderRow/BestWaveBadge/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 1
+alignment = 1
+
+[node name="TrophyIcon" type="Label" parent="UIOverlay/TopContainer/VBox/HeaderRow/BestWaveBadge/Margin/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "🏆"
+horizontal_alignment = 1
+
+[node name="BestWaveLabel" type="Label" parent="UIOverlay/TopContainer/VBox/HeaderRow/BestWaveBadge/Margin/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.83, 0.14, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_y = 1
+theme_override_font_sizes/font_size = 13
+text = "BEST WAVE: 14"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="TitleCol" type="VBoxContainer" parent="UIOverlay/TopContainer/VBox/HeaderRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="TreesAndLogo" type="HBoxContainer" parent="UIOverlay/TopContainer/VBox/HeaderRow/TitleCol"]
+layout_mode = 2
+theme_override_constants/separation = 2
+alignment = 1
+
+[node name="LeftTree" type="Label" parent="UIOverlay/TopContainer/VBox/HeaderRow/TitleCol/TreesAndLogo"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "🌲"
+vertical_alignment = 2
+
+[node name="LogoVBox" type="VBoxContainer" parent="UIOverlay/TopContainer/VBox/HeaderRow/TitleCol/TreesAndLogo"]
+layout_mode = 2
+theme_override_constants/separation = -4
+alignment = 1
+
+[node name="PolyLabel" type="Label" parent="UIOverlay/TopContainer/VBox/HeaderRow/TitleCol/TreesAndLogo/LogoVBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.92, 0.95, 1, 1)
+theme_override_colors/font_outline_color = Color(0.04, 0.05, 0.08, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 26
+text = "POLY"
+horizontal_alignment = 1
+
+[node name="FortLabel" type="Label" parent="UIOverlay/TopContainer/VBox/HeaderRow/TitleCol/TreesAndLogo/LogoVBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.78, 0.08, 1)
+theme_override_colors/font_outline_color = Color(0.04, 0.05, 0.08, 1)
+theme_override_constants/outline_size = 9
+theme_override_font_sizes/font_size = 36
+text = "FORT"
+horizontal_alignment = 1
+
+[node name="RightTree" type="Label" parent="UIOverlay/TopContainer/VBox/HeaderRow/TitleCol/TreesAndLogo"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "🌲"
+vertical_alignment = 2
+
+[node name="SubPill" type="PanelContainer" parent="UIOverlay/TopContainer/VBox/HeaderRow/TitleCol"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_styles/panel = SubResource("Style_PillDark")
+
+[node name="Margin" type="MarginContainer" parent="UIOverlay/TopContainer/VBox/HeaderRow/TitleCol/SubPill"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 2
+
+[node name="Label" type="Label" parent="UIOverlay/TopContainer/VBox/HeaderRow/TitleCol/SubPill/Margin"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.88, 0.4, 1)
+theme_override_font_sizes/font_size = 9
+text = "BASE DEFENSE • MERGE • SURVIVAL"
+horizontal_alignment = 1
+
+[node name="RightCardsCol" type="VBoxContainer" parent="UIOverlay/TopContainer/VBox/HeaderRow"]
+custom_minimum_size = Vector2(136, 0)
+layout_mode = 2
+theme_override_constants/separation = 4
+alignment = 1
+
+[node name="ScrapBadge" type="PanelContainer" parent="UIOverlay/TopContainer/VBox/HeaderRow/RightCardsCol"]
+custom_minimum_size = Vector2(0, 42)
+layout_mode = 2
+theme_override_styles/panel = SubResource("Style_CardDark")
+
+[node name="Margin" type="MarginContainer" parent="UIOverlay/TopContainer/VBox/HeaderRow/RightCardsCol/ScrapBadge"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 4
+
+[node name="HBox" type="HBoxContainer" parent="UIOverlay/TopContainer/VBox/HeaderRow/RightCardsCol/ScrapBadge/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 6
+alignment = 1
+
+[node name="CoinIcon" type="Label" parent="UIOverlay/TopContainer/VBox/HeaderRow/RightCardsCol/ScrapBadge/Margin/HBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "🪙"
+
+[node name="ScrapLabel" type="Label" parent="UIOverlay/TopContainer/VBox/HeaderRow/RightCardsCol/ScrapBadge/Margin/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 13
+text = "135 SCRAP"
+
+[node name="BtnPlus" type="PanelContainer" parent="UIOverlay/TopContainer/VBox/HeaderRow/RightCardsCol/ScrapBadge/Margin/HBox"]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+theme_override_styles/panel = SubResource("Style_BtnPlusGreen")
+
+[node name="PlusLabel" type="Label" parent="UIOverlay/TopContainer/VBox/HeaderRow/RightCardsCol/ScrapBadge/Margin/HBox/BtnPlus"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.04, 0.05, 0.07, 1)
+theme_override_font_sizes/font_size = 14
+text = "+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MilestoneBadge" type="PanelContainer" parent="UIOverlay/TopContainer/VBox/HeaderRow/RightCardsCol"]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+theme_override_styles/panel = SubResource("Style_CardCream")
+
+[node name="Margin" type="MarginContainer" parent="UIOverlay/TopContainer/VBox/HeaderRow/RightCardsCol/MilestoneBadge"]
+layout_mode = 2
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = 4
+
+[node name="HBox" type="HBoxContainer" parent="UIOverlay/TopContainer/VBox/HeaderRow/RightCardsCol/MilestoneBadge/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 6
+alignment = 1
+
+[node name="UnitIcon" type="Label" parent="UIOverlay/TopContainer/VBox/HeaderRow/RightCardsCol/MilestoneBadge/Margin/HBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "🎖️"
+
+[node name="VBox" type="VBoxContainer" parent="UIOverlay/TopContainer/VBox/HeaderRow/RightCardsCol/MilestoneBadge/Margin/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="NextHeader" type="Label" parent="UIOverlay/TopContainer/VBox/HeaderRow/RightCardsCol/MilestoneBadge/Margin/HBox/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.24, 0.28, 0.36, 1)
+theme_override_font_sizes/font_size = 8
+text = "NEXT:"
+
+[node name="MilestoneLabel" type="Label" parent="UIOverlay/TopContainer/VBox/HeaderRow/RightCardsCol/MilestoneBadge/Margin/HBox/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.07, 0.09, 0.13, 1)
+theme_override_font_sizes/font_size = 9
+text = "UNLOCK HEAVY GUNNER"
+autowrap_mode = 3
+
+[node name="BottomContainer" type="MarginContainer" parent="UIOverlay"]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -205.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 18
+
+[node name="VBox" type="VBoxContainer" parent="UIOverlay/BottomContainer"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="PlayButton" type="Button" parent="UIOverlay/BottomContainer/VBox"]
+custom_minimum_size = Vector2(0, 74)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.04, 0.05, 0.07, 1)
+theme_override_colors/font_pressed_color = Color(0.04, 0.05, 0.07, 1)
+theme_override_colors/font_hover_color = Color(0.04, 0.05, 0.07, 1)
+theme_override_colors/font_outline_color = Color(0.04, 0.05, 0.07, 1)
+theme_override_constants/outline_size = 1
+theme_override_font_sizes/font_size = 34
+theme_override_styles/normal = SubResource("Style_BtnPlayNormal")
+theme_override_styles/pressed = SubResource("Style_BtnPlayPressed")
+theme_override_styles/hover = SubResource("Style_BtnPlayNormal")
+text = "PLAY  ▶"
+
+[node name="NavRow" type="HBoxContainer" parent="UIOverlay/BottomContainer/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="ModesButton" type="Button" parent="UIOverlay/BottomContainer/VBox/NavRow"]
+custom_minimum_size = Vector2(0, 68)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("Style_BtnModes")
+theme_override_styles/pressed = SubResource("Style_BtnModes")
+theme_override_styles/hover = SubResource("Style_BtnModes")
+text = "🗺️
+MODES"
+
+[node name="UpgradesButton" type="Button" parent="UIOverlay/BottomContainer/VBox/NavRow"]
+custom_minimum_size = Vector2(0, 68)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.06, 0.12, 0.03, 1)
+theme_override_colors/font_pressed_color = Color(0.06, 0.12, 0.03, 1)
+theme_override_colors/font_hover_color = Color(0.06, 0.12, 0.03, 1)
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("Style_BtnUpgrades")
+theme_override_styles/pressed = SubResource("Style_BtnUpgrades")
+theme_override_styles/hover = SubResource("Style_BtnUpgrades")
+text = "︽
+UPGRADES"
+
+[node name="ArmoryButton" type="Button" parent="UIOverlay/BottomContainer/VBox/NavRow"]
+custom_minimum_size = Vector2(0, 68)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.07, 0.09, 0.13, 1)
+theme_override_colors/font_pressed_color = Color(0.07, 0.09, 0.13, 1)
+theme_override_colors/font_hover_color = Color(0.07, 0.09, 0.13, 1)
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("Style_BtnArmory")
+theme_override_styles/pressed = SubResource("Style_BtnArmory")
+theme_override_styles/hover = SubResource("Style_BtnArmory")
+text = "🔫
+ARMORY"
+
+[node name="SettingsButton" type="Button" parent="UIOverlay/BottomContainer/VBox/NavRow"]
+custom_minimum_size = Vector2(0, 68)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("Style_BtnSettings")
+theme_override_styles/pressed = SubResource("Style_BtnSettings")
+theme_override_styles/hover = SubResource("Style_BtnSettings")
+text = "⚙️
+SETTINGS"
+
+[node name="ModeSelectDialog" parent="." instance=ExtResource("3_mode_dialog")]
+visible = false
+layout_mode = 1
+
+[node name="ArmoryView" parent="." instance=ExtResource("4_armory")]
+visible = false
+layout_mode = 1
+
+[node name="PermanentUpgradesView" parent="." instance=ExtResource("5_upgrades")]
+visible = false
+layout_mode = 1
+
+[node name="SettingsDialog" parent="." instance=ExtResource("6_settings")]
+visible = false
+layout_mode = 1

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cfinalverify01"]
+
+[ext_resource type="Script" path="res://tests/test_final_parity_verification.gd" id="1_test"]
+
+[node name="FinalParityVerificationRunner" type="Node"]
+script = ExtResource("1_test")

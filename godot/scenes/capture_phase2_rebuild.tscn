@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://phase2_rebuild_shot"]
+
+[ext_resource type="Script" path="res://scripts/capture_phase2_rebuild.gd" id="1_shot"]
+
+[node name="CapturePhase2Rebuild" type="Node"]
+script = ExtResource("1_shot")

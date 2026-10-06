@@ -1,0 +1,219 @@
+[gd_scene format=3 uid="uid://c8upg9d2y7w4x"]
+
+[ext_resource type="Script" path="res://scripts/upgrade_selection_dialog.gd" id="1_upgrade_dialog"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_card_bg"]
+bg_color = Color(0.08, 0.09, 0.12, 0.98)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.02, 0.02, 0.02, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+shadow_color = Color(0, 0, 0, 0.8)
+shadow_size = 6
+shadow_offset = Vector2(4, 4)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_header_badge"]
+bg_color = Color(0.96, 0.88, 0.37, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.05, 0.05, 0.05, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_card_item"]
+bg_color = Color(0.14, 0.17, 0.22, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.96, 0.88, 0.37, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+shadow_color = Color(0, 0, 0, 0.5)
+shadow_size = 3
+shadow_offset = Vector2(2, 2)
+
+[node name="UpgradeSelectionDialog" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_upgrade_dialog")
+
+[node name="Dimmer" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.75)
+
+[node name="CardContainer" type="PanelContainer" parent="."]
+custom_minimum_size = Vector2(460, 480)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -230.0
+offset_top = -240.0
+offset_right = 230.0
+offset_bottom = 240.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_card_bg")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CardContainer"]
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="HeaderBadge" type="PanelContainer" parent="CardContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_header_badge")
+
+[node name="Margin" type="MarginContainer" parent="CardContainer/VBoxContainer/HeaderBadge"]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 10
+
+[node name="Label" type="Label" parent="CardContainer/VBoxContainer/HeaderBadge/Margin"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.08, 0.08, 0.08, 1)
+theme_override_font_sizes/font_size = 16
+text = "⭐ CHOOSE TACTICAL UPGRADE"
+horizontal_alignment = 1
+
+[node name="CardsRow" type="VBoxContainer" parent="CardContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Card1" type="Button" parent="CardContainer/VBoxContainer/CardsRow"]
+custom_minimum_size = Vector2(0, 95)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_card_item")
+
+[node name="VBox" type="VBoxContainer" parent="CardContainer/VBoxContainer/CardsRow/Card1"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 10.0
+offset_right = -16.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="RarityBadge" type="HBoxContainer" parent="CardContainer/VBoxContainer/CardsRow/Card1/VBox"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CardContainer/VBoxContainer/CardsRow/Card1/VBox/RarityBadge"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 11
+text = "COMMON"
+
+[node name="TitleLabel" type="Label" parent="CardContainer/VBoxContainer/CardsRow/Card1/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.96, 0.88, 0.37, 1)
+theme_override_font_sizes/font_size = 17
+text = "HEAVY AMMO"
+
+[node name="DescLabel" type="Label" parent="CardContainer/VBoxContainer/CardsRow/Card1/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.85, 0.88, 0.92, 1)
+theme_override_font_sizes/font_size = 12
+text = "+15% UNIT DAMAGE"
+
+[node name="Card2" type="Button" parent="CardContainer/VBoxContainer/CardsRow"]
+custom_minimum_size = Vector2(0, 95)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_card_item")
+
+[node name="VBox" type="VBoxContainer" parent="CardContainer/VBoxContainer/CardsRow/Card2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 10.0
+offset_right = -16.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="RarityBadge" type="HBoxContainer" parent="CardContainer/VBoxContainer/CardsRow/Card2/VBox"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CardContainer/VBoxContainer/CardsRow/Card2/VBox/RarityBadge"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 11
+text = "RARE"
+
+[node name="TitleLabel" type="Label" parent="CardContainer/VBoxContainer/CardsRow/Card2/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.96, 0.88, 0.37, 1)
+theme_override_font_sizes/font_size = 17
+text = "RAPID FIRE"
+
+[node name="DescLabel" type="Label" parent="CardContainer/VBoxContainer/CardsRow/Card2/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.85, 0.88, 0.92, 1)
+theme_override_font_sizes/font_size = 12
+text = "+10% ATTACK SPEED"
+
+[node name="Card3" type="Button" parent="CardContainer/VBoxContainer/CardsRow"]
+custom_minimum_size = Vector2(0, 95)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_card_item")
+
+[node name="VBox" type="VBoxContainer" parent="CardContainer/VBoxContainer/CardsRow/Card3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 10.0
+offset_right = -16.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="RarityBadge" type="HBoxContainer" parent="CardContainer/VBoxContainer/CardsRow/Card3/VBox"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CardContainer/VBoxContainer/CardsRow/Card3/VBox/RarityBadge"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 11
+text = "RARE"
+
+[node name="TitleLabel" type="Label" parent="CardContainer/VBoxContainer/CardsRow/Card3/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.96, 0.88, 0.37, 1)
+theme_override_font_sizes/font_size = 17
+text = "LONG BARRELS"
+
+[node name="DescLabel" type="Label" parent="CardContainer/VBoxContainer/CardsRow/Card3/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.85, 0.88, 0.92, 1)
+theme_override_font_sizes/font_size = 12
+text = "+12% WEAPON RANGE"

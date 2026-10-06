@@ -1,0 +1,145 @@
+[gd_scene load_steps=7 format=3 uid="uid://csecondchance01"]
+
+[ext_resource type="Script" path="res://scripts/second_chance_dialog.gd" id="1_sc"]
+
+[sub_resource type="StyleBoxFlat" id="Style_Card"]
+bg_color = Color(0.12, 0.14, 0.19, 0.98)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 4
+border_color = Color(0.04, 0.04, 0.05, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+shadow_color = Color(0, 0, 0, 0.8)
+shadow_size = 6
+shadow_offset = Vector2(4, 4)
+
+[sub_resource type="StyleBoxFlat" id="Style_RedBadge"]
+bg_color = Color(0.92, 0.22, 0.22, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.05, 0.05, 0.05, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="Style_AdBtn"]
+bg_color = Color(0.4, 0.85, 0.45, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 4
+border_color = Color(0.05, 0.05, 0.05, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxEmpty" id="Style_FlatTextBtn"]
+
+[node name="SecondChanceDialog" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_sc")
+
+[node name="Dimmer" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.05, 0.06, 0.08, 0.9)
+
+[node name="SafeCenter" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Card" type="PanelContainer" parent="SafeCenter"]
+custom_minimum_size = Vector2(320, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("Style_Card")
+
+[node name="Margin" type="MarginContainer" parent="SafeCenter/Card"]
+layout_mode = 2
+theme_override_constants/margin_left = 22
+theme_override_constants/margin_top = 22
+theme_override_constants/margin_right = 22
+theme_override_constants/margin_bottom = 22
+
+[node name="VBox" type="VBoxContainer" parent="SafeCenter/Card/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="DestroyedBadge" type="PanelContainer" parent="SafeCenter/Card/Margin/VBox"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_styles/panel = SubResource("Style_RedBadge")
+
+[node name="Margin" type="MarginContainer" parent="SafeCenter/Card/Margin/VBox/DestroyedBadge"]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 4
+
+[node name="Label" type="Label" parent="SafeCenter/Card/Margin/VBox/DestroyedBadge/Margin"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 12
+text = "BASE DESTROYED"
+
+[node name="Title" type="Label" parent="SafeCenter/Card/Margin/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "SECOND CHANCE"
+horizontal_alignment = 1
+
+[node name="Subtitle" type="Label" parent="SafeCenter/Card/Margin/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.96, 0.88, 0.15, 1)
+theme_override_font_sizes/font_size = 14
+text = "RESTORE 50% BASE HP"
+horizontal_alignment = 1
+
+[node name="Desc" type="Label" parent="SafeCenter/Card/Margin/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7, 0.75, 0.8, 1)
+theme_override_font_sizes/font_size = 11
+text = "Enemies freeze for 3 seconds upon return. Current combat and wave state are preserved."
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Spacer" type="Control" parent="SafeCenter/Card/Margin/VBox"]
+custom_minimum_size = Vector2(0, 6)
+layout_mode = 2
+
+[node name="WatchAdButton" type="Button" parent="SafeCenter/Card/Margin/VBox"]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.05, 0.05, 0.05, 1)
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("Style_AdBtn")
+text = "▶ WATCH AD • CONTINUE"
+
+[node name="EndRunButton" type="Button" parent="SafeCenter/Card/Margin/VBox"]
+custom_minimum_size = Vector2(0, 36)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.55, 0.6, 0.7, 1)
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("Style_FlatTextBtn")
+text = "END RUN"

@@ -145,12 +145,12 @@ func _handle_release(screen_pos: Vector2) -> void:
 func _can_merge(u1: Node3D, u2: Node3D) -> bool:
 	if u1 == null or u2 == null:
 		return false
-	if u1.level >= 8 or u2.level >= 8:
+	if u1.level >= GameBalance.MAX_UNIT_LEVEL or u2.level >= GameBalance.MAX_UNIT_LEVEL:
 		return false # Max level reached (Clause 47)
-	# Same unit type + same level
-	var type1 = u1.data.unit_type if u1.data else "rifleman"
-	var type2 = u2.data.unit_type if u2.data else "rifleman"
-	return type1 == type2 and u1.level == u2.level
+	# Same hero class + same level (Clause 45, 620)
+	var c1 = u1.hero_class if ("hero_class" in u1) else HeroDefinition.HeroClass.RIFLEMAN
+	var c2 = u2.hero_class if ("hero_class" in u2) else HeroDefinition.HeroClass.RIFLEMAN
+	return c1 == c2 and u1.level == u2.level
 
 func _move_to_slot(unit: Node3D, from_slot: Node3D, to_slot: Node3D) -> void:
 	from_slot.clear_unit()
@@ -171,6 +171,10 @@ func _execute_merge(dragged: Node3D, from_slot: Node3D, target: Node3D, to_slot:
 	# Camera impulse on merge (Clause 88)
 	if camera_ref and camera_ref.has_method("add_trauma"):
 		camera_ref.add_trauma(0.28)
+
+	# Check interactive tutorial progression (Clause 55, 143)
+	if GameManager.tutorial_step == 3:
+		GameManager.advance_tutorial_step(4)
 	
 	# Free dragged unit
 	dragged.queue_free()

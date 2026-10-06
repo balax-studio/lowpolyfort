@@ -4,9 +4,9 @@ extends Node3D
 ## Features ambient rotating radar dish, cyan status lights, and damage flash reaction.
 
 @onready var model_root: Node3D = $ModelRoot
-@onready var radar_dish: Node3D = $ModelRoot/RadarDish
-@onready var beacon_light: MeshInstance3D = $ModelRoot/BeaconLight
-@onready var hull_mesh: MeshInstance3D = $ModelRoot/HullMesh
+@onready var radar_dish: Node3D = $ModelRoot.get_node_or_null("RadarDish")
+@onready var beacon_light: MeshInstance3D = $ModelRoot.get_node_or_null("BeaconLight")
+@onready var hull_mesh: MeshInstance3D = $ModelRoot.get_node_or_null("HullMesh")
 
 var _damage_flash_timer: float = 0.0
 var _shake_timer: float = 0.0

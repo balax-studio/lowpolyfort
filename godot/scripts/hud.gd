@@ -9,6 +9,7 @@ extends Control
 @onready var coins_label: Label = $TopBar/CoinsBadge/CoinsLabel
 @onready var add_unit_button: Button = $BottomBar/AddUnitButton
 @onready var btn_text_label: Label = $BottomBar/AddUnitButton/ButtonText
+@onready var boss_banner: PanelContainer = $BossBanner
 
 func _ready() -> void:
 	# Connect to GameManager signals
@@ -17,6 +18,7 @@ func _ready() -> void:
 	GameManager.wave_changed.connect(_on_wave_changed)
 	GameManager.game_over_triggered.connect(_on_game_over)
 	GameManager.game_restarted.connect(_on_game_restarted)
+	GameManager.boss_warning_triggered.connect(_on_boss_warning)
 
 	add_unit_button.pressed.connect(_on_add_unit_pressed)
 
@@ -74,3 +76,20 @@ func _on_game_over() -> void:
 
 func _on_game_restarted() -> void:
 	_update_hud_display()
+	if boss_banner:
+		boss_banner.visible = false
+
+func _on_boss_warning(_wave_num: int) -> void:
+	if boss_banner:
+		boss_banner.visible = true
+		boss_banner.modulate.a = 1.0
+		var tween = create_tween()
+		tween.tween_property(boss_banner, "scale", Vector3(1.1, 1.1, 1.0), 0.15)
+		tween.tween_property(boss_banner, "scale", Vector3(1.0, 1.0, 1.0), 0.15)
+		tween.tween_interval(1.8)
+		tween.tween_property(boss_banner, "modulate:a", 0.0, 0.4)
+		tween.tween_callback(func():
+			boss_banner.visible = false
+			boss_banner.modulate.a = 1.0
+		)
+

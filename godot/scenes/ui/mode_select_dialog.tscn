@@ -1,0 +1,248 @@
+[gd_scene format=3 uid="uid://c7m5yq3w2e8op"]
+
+[ext_resource type="Script" path="res://scripts/mode_select_dialog.gd" id="1_dialog"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_card_bg"]
+bg_color = Color(0.08, 0.09, 0.12, 0.98)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.02, 0.02, 0.02, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+shadow_color = Color(0, 0, 0, 0.8)
+shadow_size = 6
+shadow_offset = Vector2(4, 4)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_header_badge"]
+bg_color = Color(0.96, 0.88, 0.37, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.05, 0.05, 0.05, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_item_normal"]
+bg_color = Color(0.12, 0.15, 0.2, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.2, 0.8, 0.4, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+shadow_color = Color(0, 0, 0, 0.5)
+shadow_size = 3
+shadow_offset = Vector2(2, 2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_item_chaos"]
+bg_color = Color(0.15, 0.14, 0.18, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.96, 0.88, 0.37, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+shadow_color = Color(0, 0, 0, 0.5)
+shadow_size = 3
+shadow_offset = Vector2(2, 2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_item_boss"]
+bg_color = Color(0.18, 0.12, 0.14, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.9, 0.3, 0.3, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+shadow_color = Color(0, 0, 0, 0.5)
+shadow_size = 3
+shadow_offset = Vector2(2, 2)
+
+[node name="ModeSelectDialog" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_dialog")
+
+[node name="Dimmer" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.7)
+
+[node name="CardContainer" type="PanelContainer" parent="."]
+custom_minimum_size = Vector2(440, 480)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -220.0
+offset_top = -240.0
+offset_right = 220.0
+offset_bottom = 240.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_card_bg")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CardContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Header" type="HBoxContainer" parent="CardContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TitleBadge" type="PanelContainer" parent="CardContainer/VBoxContainer/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_header_badge")
+
+[node name="MarginContainer" type="MarginContainer" parent="CardContainer/VBoxContainer/Header/TitleBadge"]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 8
+
+[node name="Label" type="Label" parent="CardContainer/VBoxContainer/Header/TitleBadge/MarginContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.08, 0.08, 0.08, 1)
+theme_override_font_sizes/font_size = 16
+text = "SELECT MISSION MODE"
+horizontal_alignment = 1
+
+[node name="CloseButton" type="Button" parent="CardContainer/VBoxContainer/Header"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+text = "✕"
+
+[node name="NormalCard" type="Button" parent="CardContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 95)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_item_normal")
+
+[node name="VBox" type="VBoxContainer" parent="CardContainer/VBoxContainer/NormalCard"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 10.0
+offset_right = -16.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="TitleLabel" type="Label" parent="CardContainer/VBoxContainer/NormalCard/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.3, 0.9, 0.5, 1)
+theme_override_font_sizes/font_size = 18
+text = "NORMAL MODE"
+
+[node name="SubLabel" type="Label" parent="CardContainer/VBoxContainer/NormalCard/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7, 0.75, 0.8, 1)
+theme_override_font_sizes/font_size = 11
+text = "BUILD • MERGE • SURVIVE"
+
+[node name="BestLabel" type="Label" parent="CardContainer/VBoxContainer/NormalCard/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 12
+text = "BEST WAVE: 1"
+
+[node name="ChaosCard" type="Button" parent="CardContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 95)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_item_chaos")
+
+[node name="VBox" type="VBoxContainer" parent="CardContainer/VBoxContainer/ChaosCard"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 10.0
+offset_right = -16.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="TitleLabel" type="Label" parent="CardContainer/VBoxContainer/ChaosCard/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.96, 0.88, 0.37, 1)
+theme_override_font_sizes/font_size = 18
+text = "CHAOS MODE"
+
+[node name="SubLabel" type="Label" parent="CardContainer/VBoxContainer/ChaosCard/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7, 0.75, 0.8, 1)
+theme_override_font_sizes/font_size = 11
+text = "🔒 DEFEAT NORMAL WAVE 5 BOSS"
+
+[node name="BestLabel" type="Label" parent="CardContainer/VBoxContainer/ChaosCard/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 12
+text = "BEST WAVE: 0"
+
+[node name="BossRushCard" type="Button" parent="CardContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 95)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_item_boss")
+
+[node name="VBox" type="VBoxContainer" parent="CardContainer/VBoxContainer/BossRushCard"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 10.0
+offset_right = -16.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="TitleLabel" type="Label" parent="CardContainer/VBoxContainer/BossRushCard/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.95, 0.4, 0.4, 1)
+theme_override_font_sizes/font_size = 18
+text = "BOSS RUSH"
+
+[node name="SubLabel" type="Label" parent="CardContainer/VBoxContainer/BossRushCard/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7, 0.75, 0.8, 1)
+theme_override_font_sizes/font_size = 11
+text = "🔒 DEFEAT NORMAL WAVE 10 BOSS"
+
+[node name="BestLabel" type="Label" parent="CardContainer/VBoxContainer/BossRushCard/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 12
+text = "BEST: 0 / 5"

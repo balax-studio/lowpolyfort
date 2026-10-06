@@ -1,9 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://cgameoverui01"]
+[gd_scene load_steps=8 format=3 uid="uid://cgameoverui01"]
 
 [ext_resource type="Script" path="res://scripts/game_over_dialog.gd" id="1_over"]
 
 [sub_resource type="StyleBoxFlat" id="Style_GameOverPanel"]
-bg_color = Color(0.1, 0.12, 0.16, 0.96)
+bg_color = Color(0.08, 0.1, 0.14, 0.98)
 border_width_left = 4
 border_width_top = 4
 border_width_right = 4
@@ -13,40 +13,88 @@ corner_radius_top_left = 12
 corner_radius_top_right = 12
 corner_radius_bottom_right = 12
 corner_radius_bottom_left = 12
-content_margin_left = 24.0
-content_margin_top = 28.0
-content_margin_right = 24.0
-content_margin_bottom = 28.0
-shadow_color = Color(0, 0, 0, 0.6)
-shadow_size = 0
-shadow_offset = Vector2(0, 6)
+content_margin_left = 22.0
+content_margin_top = 22.0
+content_margin_right = 22.0
+content_margin_bottom = 22.0
+shadow_color = Color(0, 0, 0, 0.7)
+shadow_size = 6
+shadow_offset = Vector2(4, 4)
+
+[sub_resource type="StyleBoxFlat" id="Style_BannerBadge"]
+bg_color = Color(0.92, 0.22, 0.22, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 3
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+content_margin_left = 14.0
+content_margin_top = 6.0
+content_margin_right = 14.0
+content_margin_bottom = 6.0
+
+[sub_resource type="StyleBoxFlat" id="Style_BestBadge"]
+bg_color = Color(0.85, 0.96, 0.22, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+content_margin_left = 10.0
+content_margin_top = 4.0
+content_margin_right = 10.0
+content_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxFlat" id="Style_Milestone"]
+bg_color = Color(0.14, 0.17, 0.24, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 3
+border_color = Color(0.96, 0.74, 0.15, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+content_margin_left = 14.0
+content_margin_top = 8.0
+content_margin_right = 14.0
+content_margin_bottom = 8.0
 
 [sub_resource type="StyleBoxFlat" id="Style_RetryBtn"]
 bg_color = Color(0.85, 0.96, 0.22, 1)
-border_width_left = 4
-border_width_top = 4
-border_width_right = 4
-border_width_bottom = 5
-border_color = Color(0, 0, 0, 1)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-shadow_color = Color(0, 0, 0, 1)
-shadow_size = 0
-shadow_offset = Vector2(0, 4)
-
-[sub_resource type="StyleBoxFlat" id="Style_RetryPressed"]
-bg_color = Color(0.75, 0.88, 0.16, 1)
-border_width_left = 4
-border_width_top = 4
-border_width_right = 4
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
 border_width_bottom = 4
 border_color = Color(0, 0, 0, 1)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+shadow_color = Color(0, 0, 0, 1)
+shadow_size = 0
+shadow_offset = Vector2(0, 3)
+
+[sub_resource type="StyleBoxFlat" id="Style_SecondaryBtn"]
+bg_color = Color(0.22, 0.26, 0.35, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 3
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
 
 [node name="GameOverDialog" type="Control"]
 layout_mode = 3
@@ -64,62 +112,161 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0, 0, 0.65)
+color = Color(0, 0, 0, 0.75)
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
+custom_minimum_size = Vector2(400, 480)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -170.0
-offset_top = -140.0
-offset_right = 170.0
-offset_bottom = 140.0
+offset_left = -200.0
+offset_top = -240.0
+offset_right = 200.0
+offset_bottom = 240.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("Style_GameOverPanel")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
 layout_mode = 2
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="BannerBadge" type="PanelContainer" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_styles/panel = SubResource("Style_BannerBadge")
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/BannerBadge"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 15
+text = "RUN OVER"
+horizontal_alignment = 1
+
+[node name="ScoreTitleLabel" type="Label" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 28
+text = "WAVE 1"
+horizontal_alignment = 1
+
+[node name="BestRecordBadge" type="PanelContainer" parent="PanelContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_styles/panel = SubResource("Style_BestBadge")
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/BestRecordBadge"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 12
+text = "★ NEW BEST RECORD! ★"
+horizontal_alignment = 1
+
+[node name="BestScoreLabel" type="Label" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.65, 0.72, 0.82, 1)
+theme_override_font_sizes/font_size = 12
+text = "ALL-TIME BEST: WAVE 1"
+horizontal_alignment = 1
+
+[node name="MilestoneCard" type="PanelContainer" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("Style_Milestone")
+
+[node name="VBox" type="VBoxContainer" parent="PanelContainer/VBoxContainer/MilestoneCard"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="Title" type="Label" parent="PanelContainer/VBoxContainer/MilestoneCard/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.96, 0.74, 0.15, 1)
+theme_override_font_sizes/font_size = 12
+text = "NEXT: WAVE 5 BOSS"
+
+[node name="Subtitle" type="Label" parent="PanelContainer/VBoxContainer/MilestoneCard/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 11
+text = "DEFEAT TO UNLOCK CHAOS MODE"
+
+[node name="StatsRow" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
 theme_override_constants/separation = 16
 alignment = 1
 
-[node name="TitleLabel" type="Label" parent="PanelContainer/VBoxContainer"]
+[node name="KillsCol" type="VBoxContainer" parent="PanelContainer/VBoxContainer/StatsRow"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.95, 0.25, 0.25, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 6
-theme_override_font_sizes/font_size = 28
-text = "BASE DESTROYED"
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="ValueLabel" type="Label" parent="PanelContainer/VBoxContainer/StatsRow/KillsCol"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 16
+text = "0"
 horizontal_alignment = 1
 
-[node name="SubtitleLabel" type="Label" parent="PanelContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/StatsRow/KillsCol"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.85, 0.88, 0.92, 1)
-theme_override_font_sizes/font_size = 15
-text = "The perimeter defense collapsed."
+theme_override_colors/font_color = Color(0.65, 0.72, 0.82, 1)
+theme_override_font_sizes/font_size = 10
+text = "KILLS"
 horizontal_alignment = 1
 
-[node name="WavesSurvivedLabel" type="Label" parent="PanelContainer/VBoxContainer"]
+[node name="CoinsCol" type="VBoxContainer" parent="PanelContainer/VBoxContainer/StatsRow"]
 layout_mode = 2
-theme_override_colors/font_color = Color(1, 0.85, 0.2, 1)
-theme_override_font_sizes/font_size = 20
-text = "WAVE REACHED: 1"
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="ValueLabel" type="Label" parent="PanelContainer/VBoxContainer/StatsRow/CoinsCol"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.96, 0.74, 0.15, 1)
+theme_override_font_sizes/font_size = 16
+text = "150"
 horizontal_alignment = 1
 
-[node name="Spacer" type="Control" parent="PanelContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 8)
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/StatsRow/CoinsCol"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.65, 0.72, 0.82, 1)
+theme_override_font_sizes/font_size = 10
+text = "COINS"
+horizontal_alignment = 1
 
-[node name="RetryButton" type="Button" parent="PanelContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 54)
+[node name="ScrapCol" type="VBoxContainer" parent="PanelContainer/VBoxContainer/StatsRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="ValueLabel" type="Label" parent="PanelContainer/VBoxContainer/StatsRow/ScrapCol"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.75, 0.45, 0.95, 1)
+theme_override_font_sizes/font_size = 16
+text = "+3"
+horizontal_alignment = 1
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/StatsRow/ScrapCol"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.65, 0.72, 0.82, 1)
+theme_override_font_sizes/font_size = 10
+text = "SCRAP"
+horizontal_alignment = 1
+
+[node name="ExtraScrapButton" type="Button" parent="PanelContainer/VBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(0, 44)
 layout_mode = 2
 theme_override_styles/normal = SubResource("Style_RetryBtn")
-theme_override_styles/pressed = SubResource("Style_RetryPressed")
 
-[node name="ButtonText" type="Label" parent="PanelContainer/VBoxContainer/RetryButton"]
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/ExtraScrapButton"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -127,7 +274,67 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 22
-text = "RETRY DEFENSE"
+theme_override_font_sizes/font_size = 14
+text = "▶ WATCH AD • +5 SCRAP"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RetryButton" type="Button" parent="PanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 52)
+layout_mode = 2
+theme_override_styles/normal = SubResource("Style_RetryBtn")
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/RetryButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 20
+text = "RETRY"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SecondaryRow" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="UpgradesButton" type="Button" parent="PanelContainer/VBoxContainer/SecondaryRow"]
+custom_minimum_size = Vector2(0, 42)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("Style_SecondaryBtn")
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/SecondaryRow/UpgradesButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 13
+text = "UPGRADES"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MenuButton" type="Button" parent="PanelContainer/VBoxContainer/SecondaryRow"]
+custom_minimum_size = Vector2(0, 42)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("Style_SecondaryBtn")
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/SecondaryRow/MenuButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 13
+text = "MAIN MENU"
 horizontal_alignment = 1
 vertical_alignment = 1

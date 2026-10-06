@@ -1,0 +1,557 @@
+[gd_scene load_steps=8 format=3 uid="uid://cpermupgrades01"]
+
+[ext_resource type="Script" path="res://scripts/permanent_upgrades_view.gd" id="1_perm"]
+
+[sub_resource type="StyleBoxFlat" id="Style_PerkCard"]
+bg_color = Color(0.12, 0.14, 0.19, 0.98)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 4
+border_color = Color(0.04, 0.04, 0.05, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+shadow_color = Color(0, 0, 0, 0.6)
+shadow_size = 4
+shadow_offset = Vector2(3, 3)
+
+[sub_resource type="StyleBoxFlat" id="Style_BadgePurple"]
+bg_color = Color(0.6, 0.25, 0.88, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.05, 0.05, 0.05, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="Style_BadgeYellow"]
+bg_color = Color(0.96, 0.88, 0.15, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.05, 0.05, 0.05, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="Style_BuyBtn"]
+bg_color = Color(0.85, 0.96, 0.22, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 3
+border_color = Color(0.05, 0.05, 0.05, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="Style_BuyBtnDisabled"]
+bg_color = Color(0.2, 0.22, 0.26, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.12, 0.13, 0.15, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="Style_BackBtn"]
+bg_color = Color(0.85, 0.96, 0.22, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 4
+border_color = Color(0.05, 0.05, 0.05, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+shadow_color = Color(0, 0, 0, 1)
+shadow_size = 0
+shadow_offset = Vector2(0, 3)
+
+[node name="PermanentUpgradesView" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_perm")
+
+[node name="Dimmer" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.05, 0.06, 0.08, 0.94)
+
+[node name="SafeContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 32
+
+[node name="VBox" type="VBoxContainer" parent="SafeContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Header" type="HBoxContainer" parent="SafeContainer/VBox"]
+layout_mode = 2
+alignment = 1
+
+[node name="TitleBadge" type="PanelContainer" parent="SafeContainer/VBox/Header"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("Style_BadgePurple")
+
+[node name="Margin" type="MarginContainer" parent="SafeContainer/VBox/Header/TitleBadge"]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 6
+
+[node name="Label" type="Label" parent="SafeContainer/VBox/Header/TitleBadge/Margin"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 15
+text = "⚡ PERMANENT UPGRADES"
+
+[node name="Spacer" type="Control" parent="SafeContainer/VBox/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ScrapBadge" type="PanelContainer" parent="SafeContainer/VBox/Header"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("Style_BadgeYellow")
+
+[node name="Margin" type="MarginContainer" parent="SafeContainer/VBox/Header/ScrapBadge"]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 6
+
+[node name="Label" type="Label" parent="SafeContainer/VBox/Header/ScrapBadge/Margin"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.05, 0.05, 0.05, 1)
+theme_override_font_sizes/font_size = 14
+text = "0 SCRAP ⚙️"
+
+[node name="Scroll" type="ScrollContainer" parent="SafeContainer/VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="PerksContainer" type="VBoxContainer" parent="SafeContainer/VBox/Scroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 12
+
+[node name="BaseArmorCard" type="PanelContainer" parent="SafeContainer/VBox/Scroll/PerksContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("Style_PerkCard")
+
+[node name="Margin" type="MarginContainer" parent="SafeContainer/VBox/Scroll/PerksContainer/BaseArmorCard"]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 10
+
+[node name="HBox" type="HBoxContainer" parent="SafeContainer/VBox/Scroll/PerksContainer/BaseArmorCard/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="InfoVBox" type="VBoxContainer" parent="SafeContainer/VBox/Scroll/PerksContainer/BaseArmorCard/Margin/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 4
+
+[node name="HeaderRow" type="HBoxContainer" parent="SafeContainer/VBox/Scroll/PerksContainer/BaseArmorCard/Margin/HBox/InfoVBox"]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="SafeContainer/VBox/Scroll/PerksContainer/BaseArmorCard/Margin/HBox/InfoVBox/HeaderRow"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+text = "BASE ARMOR"
+
+[node name="Spacer" type="Control" parent="SafeContainer/VBox/Scroll/PerksContainer/BaseArmorCard/Margin/HBox/InfoVBox/HeaderRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="LevelLabel" type="Label" parent="SafeContainer/VBox/Scroll/PerksContainer/BaseArmorCard/Margin/HBox/InfoVBox/HeaderRow"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+text = "LVL 0"
+
+[node name="DescLabel" type="Label" parent="SafeContainer/VBox/Scroll/PerksContainer/BaseArmorCard/Margin/HBox/InfoVBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7, 0.75, 0.8, 1)
+theme_override_font_sizes/font_size = 12
+text = "+50 Starting Base HP per level"
+
+[node name="BuyButton" type="Button" parent="SafeContainer/VBox/Scroll/PerksContainer/BaseArmorCard/Margin/HBox"]
+custom_minimum_size = Vector2(100, 42)
+layout_mode = 2
+theme_override_styles/normal = SubResource("Style_BuyBtn")
+theme_override_styles/disabled = SubResource("Style_BuyBtnDisabled")
+
+[node name="Label" type="Label" parent="SafeContainer/VBox/Scroll/PerksContainer/BaseArmorCard/Margin/HBox/BuyButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.05, 0.05, 0.05, 1)
+theme_override_font_sizes/font_size = 13
+text = "25 SCRAP"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StartingCashCard" type="PanelContainer" parent="SafeContainer/VBox/Scroll/PerksContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("Style_PerkCard")
+
+[node name="Margin" type="MarginContainer" parent="SafeContainer/VBox/Scroll/PerksContainer/StartingCashCard"]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 10
+
+[node name="HBox" type="HBoxContainer" parent="SafeContainer/VBox/Scroll/PerksContainer/StartingCashCard/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="InfoVBox" type="VBoxContainer" parent="SafeContainer/VBox/Scroll/PerksContainer/StartingCashCard/Margin/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 4
+
+[node name="HeaderRow" type="HBoxContainer" parent="SafeContainer/VBox/Scroll/PerksContainer/StartingCashCard/Margin/HBox/InfoVBox"]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="SafeContainer/VBox/Scroll/PerksContainer/StartingCashCard/Margin/HBox/InfoVBox/HeaderRow"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+text = "STARTING CASH"
+
+[node name="Spacer" type="Control" parent="SafeContainer/VBox/Scroll/PerksContainer/StartingCashCard/Margin/HBox/InfoVBox/HeaderRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="LevelLabel" type="Label" parent="SafeContainer/VBox/Scroll/PerksContainer/StartingCashCard/Margin/HBox/InfoVBox/HeaderRow"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+text = "LVL 0"
+
+[node name="DescLabel" type="Label" parent="SafeContainer/VBox/Scroll/PerksContainer/StartingCashCard/Margin/HBox/InfoVBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7, 0.75, 0.8, 1)
+theme_override_font_sizes/font_size = 12
+text = "+10 Starting Coins each deployment"
+
+[node name="BuyButton" type="Button" parent="SafeContainer/VBox/Scroll/PerksContainer/StartingCashCard/Margin/HBox"]
+custom_minimum_size = Vector2(100, 42)
+layout_mode = 2
+theme_override_styles/normal = SubResource("Style_BuyBtn")
+theme_override_styles/disabled = SubResource("Style_BuyBtnDisabled")
+
+[node name="Label" type="Label" parent="SafeContainer/VBox/Scroll/PerksContainer/StartingCashCard/Margin/HBox/BuyButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.05, 0.05, 0.05, 1)
+theme_override_font_sizes/font_size = 13
+text = "25 SCRAP"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="UnitTrainingCard" type="PanelContainer" parent="SafeContainer/VBox/Scroll/PerksContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("Style_PerkCard")
+
+[node name="Margin" type="MarginContainer" parent="SafeContainer/VBox/Scroll/PerksContainer/UnitTrainingCard"]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 10
+
+[node name="HBox" type="HBoxContainer" parent="SafeContainer/VBox/Scroll/PerksContainer/UnitTrainingCard/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="InfoVBox" type="VBoxContainer" parent="SafeContainer/VBox/Scroll/PerksContainer/UnitTrainingCard/Margin/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 4
+
+[node name="HeaderRow" type="HBoxContainer" parent="SafeContainer/VBox/Scroll/PerksContainer/UnitTrainingCard/Margin/HBox/InfoVBox"]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="SafeContainer/VBox/Scroll/PerksContainer/UnitTrainingCard/Margin/HBox/InfoVBox/HeaderRow"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+text = "UNIT TRAINING"
+
+[node name="Spacer" type="Control" parent="SafeContainer/VBox/Scroll/PerksContainer/UnitTrainingCard/Margin/HBox/InfoVBox/HeaderRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="LevelLabel" type="Label" parent="SafeContainer/VBox/Scroll/PerksContainer/UnitTrainingCard/Margin/HBox/InfoVBox/HeaderRow"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+text = "LVL 0"
+
+[node name="DescLabel" type="Label" parent="SafeContainer/VBox/Scroll/PerksContainer/UnitTrainingCard/Margin/HBox/InfoVBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7, 0.75, 0.8, 1)
+theme_override_font_sizes/font_size = 12
+text = "+2.0% Squad damage per level"
+
+[node name="BuyButton" type="Button" parent="SafeContainer/VBox/Scroll/PerksContainer/UnitTrainingCard/Margin/HBox"]
+custom_minimum_size = Vector2(100, 42)
+layout_mode = 2
+theme_override_styles/normal = SubResource("Style_BuyBtn")
+theme_override_styles/disabled = SubResource("Style_BuyBtnDisabled")
+
+[node name="Label" type="Label" parent="SafeContainer/VBox/Scroll/PerksContainer/UnitTrainingCard/Margin/HBox/BuyButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.05, 0.05, 0.05, 1)
+theme_override_font_sizes/font_size = 13
+text = "25 SCRAP"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RapidTrainingCard" type="PanelContainer" parent="SafeContainer/VBox/Scroll/PerksContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("Style_PerkCard")
+
+[node name="Margin" type="MarginContainer" parent="SafeContainer/VBox/Scroll/PerksContainer/RapidTrainingCard"]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 10
+
+[node name="HBox" type="HBoxContainer" parent="SafeContainer/VBox/Scroll/PerksContainer/RapidTrainingCard/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="InfoVBox" type="VBoxContainer" parent="SafeContainer/VBox/Scroll/PerksContainer/RapidTrainingCard/Margin/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 4
+
+[node name="HeaderRow" type="HBoxContainer" parent="SafeContainer/VBox/Scroll/PerksContainer/RapidTrainingCard/Margin/HBox/InfoVBox"]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="SafeContainer/VBox/Scroll/PerksContainer/RapidTrainingCard/Margin/HBox/InfoVBox/HeaderRow"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+text = "RAPID TRAINING"
+
+[node name="Spacer" type="Control" parent="SafeContainer/VBox/Scroll/PerksContainer/RapidTrainingCard/Margin/HBox/InfoVBox/HeaderRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="LevelLabel" type="Label" parent="SafeContainer/VBox/Scroll/PerksContainer/RapidTrainingCard/Margin/HBox/InfoVBox/HeaderRow"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+text = "LVL 0"
+
+[node name="DescLabel" type="Label" parent="SafeContainer/VBox/Scroll/PerksContainer/RapidTrainingCard/Margin/HBox/InfoVBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7, 0.75, 0.8, 1)
+theme_override_font_sizes/font_size = 12
+text = "+1.5% Squad attack speed per level"
+
+[node name="BuyButton" type="Button" parent="SafeContainer/VBox/Scroll/PerksContainer/RapidTrainingCard/Margin/HBox"]
+custom_minimum_size = Vector2(100, 42)
+layout_mode = 2
+theme_override_styles/normal = SubResource("Style_BuyBtn")
+theme_override_styles/disabled = SubResource("Style_BuyBtnDisabled")
+
+[node name="Label" type="Label" parent="SafeContainer/VBox/Scroll/PerksContainer/RapidTrainingCard/Margin/HBox/BuyButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.05, 0.05, 0.05, 1)
+theme_override_font_sizes/font_size = 13
+text = "25 SCRAP"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LuckCard" type="PanelContainer" parent="SafeContainer/VBox/Scroll/PerksContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("Style_PerkCard")
+
+[node name="Margin" type="MarginContainer" parent="SafeContainer/VBox/Scroll/PerksContainer/LuckCard"]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 10
+
+[node name="HBox" type="HBoxContainer" parent="SafeContainer/VBox/Scroll/PerksContainer/LuckCard/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="InfoVBox" type="VBoxContainer" parent="SafeContainer/VBox/Scroll/PerksContainer/LuckCard/Margin/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 4
+
+[node name="HeaderRow" type="HBoxContainer" parent="SafeContainer/VBox/Scroll/PerksContainer/LuckCard/Margin/HBox/InfoVBox"]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="SafeContainer/VBox/Scroll/PerksContainer/LuckCard/Margin/HBox/InfoVBox/HeaderRow"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+text = "LUCK"
+
+[node name="Spacer" type="Control" parent="SafeContainer/VBox/Scroll/PerksContainer/LuckCard/Margin/HBox/InfoVBox/HeaderRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="LevelLabel" type="Label" parent="SafeContainer/VBox/Scroll/PerksContainer/LuckCard/Margin/HBox/InfoVBox/HeaderRow"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+text = "LVL 0"
+
+[node name="DescLabel" type="Label" parent="SafeContainer/VBox/Scroll/PerksContainer/LuckCard/Margin/HBox/InfoVBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7, 0.75, 0.8, 1)
+theme_override_font_sizes/font_size = 12
+text = "+0.5% Critical strike chance per level"
+
+[node name="BuyButton" type="Button" parent="SafeContainer/VBox/Scroll/PerksContainer/LuckCard/Margin/HBox"]
+custom_minimum_size = Vector2(100, 42)
+layout_mode = 2
+theme_override_styles/normal = SubResource("Style_BuyBtn")
+theme_override_styles/disabled = SubResource("Style_BuyBtnDisabled")
+
+[node name="Label" type="Label" parent="SafeContainer/VBox/Scroll/PerksContainer/LuckCard/Margin/HBox/BuyButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.05, 0.05, 0.05, 1)
+theme_override_font_sizes/font_size = 13
+text = "25 SCRAP"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BountyCard" type="PanelContainer" parent="SafeContainer/VBox/Scroll/PerksContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("Style_PerkCard")
+
+[node name="Margin" type="MarginContainer" parent="SafeContainer/VBox/Scroll/PerksContainer/BountyCard"]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 10
+
+[node name="HBox" type="HBoxContainer" parent="SafeContainer/VBox/Scroll/PerksContainer/BountyCard/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="InfoVBox" type="VBoxContainer" parent="SafeContainer/VBox/Scroll/PerksContainer/BountyCard/Margin/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 4
+
+[node name="HeaderRow" type="HBoxContainer" parent="SafeContainer/VBox/Scroll/PerksContainer/BountyCard/Margin/HBox/InfoVBox"]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="SafeContainer/VBox/Scroll/PerksContainer/BountyCard/Margin/HBox/InfoVBox/HeaderRow"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+text = "BOUNTY"
+
+[node name="Spacer" type="Control" parent="SafeContainer/VBox/Scroll/PerksContainer/BountyCard/Margin/HBox/InfoVBox/HeaderRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="LevelLabel" type="Label" parent="SafeContainer/VBox/Scroll/PerksContainer/BountyCard/Margin/HBox/InfoVBox/HeaderRow"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+text = "LVL 0"
+
+[node name="DescLabel" type="Label" parent="SafeContainer/VBox/Scroll/PerksContainer/BountyCard/Margin/HBox/InfoVBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7, 0.75, 0.8, 1)
+theme_override_font_sizes/font_size = 12
+text = "+2.0% Extra coin rewards from fallen foes"
+
+[node name="BuyButton" type="Button" parent="SafeContainer/VBox/Scroll/PerksContainer/BountyCard/Margin/HBox"]
+custom_minimum_size = Vector2(100, 42)
+layout_mode = 2
+theme_override_styles/normal = SubResource("Style_BuyBtn")
+theme_override_styles/disabled = SubResource("Style_BuyBtnDisabled")
+
+[node name="Label" type="Label" parent="SafeContainer/VBox/Scroll/PerksContainer/BountyCard/Margin/HBox/BuyButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.05, 0.05, 0.05, 1)
+theme_override_font_sizes/font_size = 13
+text = "25 SCRAP"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BackButton" type="Button" parent="SafeContainer/VBox"]
+custom_minimum_size = Vector2(0, 52)
+layout_mode = 2
+theme_override_styles/normal = SubResource("Style_BackBtn")
+
+[node name="Label" type="Label" parent="SafeContainer/VBox/BackButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.05, 0.05, 0.05, 1)
+theme_override_font_sizes/font_size = 16
+text = "← BACK TO MENU"
+horizontal_alignment = 1
+vertical_alignment = 1

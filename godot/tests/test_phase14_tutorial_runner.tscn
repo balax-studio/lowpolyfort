@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://ctestphase1401"]
+
+[ext_resource type="Script" path="res://tests/test_phase14_tutorial_runner.gd" id="1_test"]
+
+[node name="TestPhase14Runner" type="Node"]
+script = ExtResource("1_test")

@@ -1,28 +1,130 @@
-[gd_scene load_steps=12 format=3 uid="uid://cenemy01basic"]
+[gd_scene load_steps=31 format=3 uid="uid://cenemy01basic"]
 
 [ext_resource type="Script" path="res://scripts/enemy.gd" id="1_enemy"]
 
-[sub_resource type="StandardMaterial3D" id="Mat_MutantSkin"]
-albedo_color = Color(0.72, 0.24, 0.28, 1)
-roughness = 0.8
+[sub_resource type="StandardMaterial3D" id="Mat_CoralChitin"]
+albedo_color = Color(0.82, 0.24, 0.24, 1)
+metallic = 0.0
+roughness = 0.95
+specular_mode = 2
+metallic_specular = 0.0
 
-[sub_resource type="BoxMesh" id="Mesh_Torso"]
-material = SubResource("Mat_MutantSkin")
-size = Vector3(0.7, 0.8, 0.65)
+[sub_resource type="SphereMesh" id="Mesh_ChestTorso"]
+material = SubResource("Mat_CoralChitin")
+radius = 0.28
+height = 0.44
+radial_segments = 6
+rings = 3
 
-[sub_resource type="BoxMesh" id="Mesh_Head"]
-material = SubResource("Mat_MutantSkin")
-size = Vector3(0.5, 0.4, 0.45)
+[sub_resource type="StandardMaterial3D" id="Mat_HarnessDark"]
+albedo_color = Color(0.2, 0.22, 0.26, 1)
+metallic = 0.0
+roughness = 0.95
+specular_mode = 2
+metallic_specular = 0.0
 
-[sub_resource type="StandardMaterial3D" id="Mat_Eye"]
-albedo_color = Color(1, 0.8, 0.1, 1)
+[sub_resource type="BoxMesh" id="Mesh_ChestHarness"]
+material = SubResource("Mat_HarnessDark")
+size = Vector3(0.44, 0.22, 0.36)
+
+[sub_resource type="CylinderMesh" id="Mesh_Hips"]
+material = SubResource("Mat_HarnessDark")
+top_radius = 0.2
+bottom_radius = 0.16
+height = 0.22
+radial_segments = 6
+rings = 1
+
+[sub_resource type="SphereMesh" id="Mesh_ShoulderPauldron"]
+material = SubResource("Mat_CoralChitin")
+radius = 0.18
+height = 0.28
+radial_segments = 6
+rings = 3
+
+[sub_resource type="PrismMesh" id="Mesh_SpineRidge"]
+material = SubResource("Mat_HarnessDark")
+left_to_right = 0.5
+size = Vector3(0.12, 0.18, 0.18)
+
+[sub_resource type="BoxMesh" id="Mesh_MutantHead"]
+material = SubResource("Mat_CoralChitin")
+size = Vector3(0.34, 0.26, 0.32)
+
+[sub_resource type="StandardMaterial3D" id="Mat_PaleSnout"]
+albedo_color = Color(0.92, 0.82, 0.78, 1)
+metallic = 0.0
+roughness = 0.95
+specular_mode = 2
+metallic_specular = 0.0
+
+[sub_resource type="BoxMesh" id="Mesh_SnoutMask"]
+material = SubResource("Mat_PaleSnout")
+size = Vector3(0.28, 0.16, 0.18)
+
+[sub_resource type="PrismMesh" id="Mesh_PunkMohawk"]
+material = SubResource("Mat_CoralChitin")
+left_to_right = 0.5
+size = Vector3(0.1, 0.22, 0.32)
+
+[sub_resource type="StandardMaterial3D" id="Mat_AmberGlow"]
+albedo_color = Color(1, 0.75, 0.12, 1)
 emission_enabled = true
-emission = Color(1, 0.8, 0.1, 1)
-emission_energy_multiplier = 2.0
+emission = Color(1, 0.75, 0.12, 1)
+emission_energy_multiplier = 2.2
 
-[sub_resource type="BoxMesh" id="Mesh_Eyes"]
-material = SubResource("Mat_Eye")
-size = Vector3(0.35, 0.1, 0.08)
+[sub_resource type="BoxMesh" id="Mesh_EyeSlit"]
+material = SubResource("Mat_AmberGlow")
+size = Vector3(0.24, 0.06, 0.08)
+
+[sub_resource type="CylinderMesh" id="Mesh_ArmUpper"]
+material = SubResource("Mat_CoralChitin")
+top_radius = 0.11
+bottom_radius = 0.09
+height = 0.32
+radial_segments = 5
+
+[sub_resource type="BoxMesh" id="Mesh_HandFist"]
+material = SubResource("Mat_CoralChitin")
+size = Vector3(0.14, 0.14, 0.18)
+
+[sub_resource type="StandardMaterial3D" id="Mat_WoodClub"]
+albedo_color = Color(0.38, 0.26, 0.18, 1)
+roughness = 0.85
+
+[sub_resource type="CylinderMesh" id="Mesh_MaceHandle"]
+material = SubResource("Mat_WoodClub")
+top_radius = 0.035
+bottom_radius = 0.035
+height = 0.52
+radial_segments = 5
+
+[sub_resource type="StandardMaterial3D" id="Mat_IronSpikes"]
+albedo_color = Color(0.3, 0.32, 0.36, 1)
+roughness = 0.7
+
+[sub_resource type="SphereMesh" id="Mesh_MaceHead"]
+material = SubResource("Mat_IronSpikes")
+radius = 0.12
+height = 0.22
+radial_segments = 6
+rings = 3
+
+[sub_resource type="PrismMesh" id="Mesh_MaceSpike"]
+material = SubResource("Mat_IronSpikes")
+left_to_right = 0.5
+size = Vector3(0.06, 0.1, 0.06)
+
+[sub_resource type="CylinderMesh" id="Mesh_LegThigh"]
+material = SubResource("Mat_HarnessDark")
+top_radius = 0.12
+bottom_radius = 0.09
+height = 0.24
+radial_segments = 5
+
+[sub_resource type="BoxMesh" id="Mesh_FootBoot"]
+material = SubResource("Mat_HarnessDark")
+size = Vector3(0.18, 0.12, 0.24)
 
 [sub_resource type="StandardMaterial3D" id="Mat_HpBg"]
 albedo_color = Color(0.1, 0.1, 0.12, 1)
@@ -42,7 +144,7 @@ material = SubResource("Mat_HpFill")
 size = Vector3(0.7, 0.06, 0.05)
 
 [sub_resource type="BoxShape3D" id="Shape_EnemyCollider"]
-size = Vector3(0.9, 1.2, 0.9)
+size = Vector3(0.85, 0.9, 0.9)
 
 [node name="Enemy" type="Node3D" groups=["enemies"]]
 script = ExtResource("1_enemy")
@@ -50,19 +152,101 @@ script = ExtResource("1_enemy")
 [node name="ModelRoot" type="Node3D" parent="."]
 
 [node name="BodyMesh" type="MeshInstance3D" parent="ModelRoot"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0)
-mesh = SubResource("Mesh_Torso")
+transform = Transform3D(1, 0, 0, 0, 0.939693, 0.34202, 0, -0.34202, 0.939693, 0, 0.52, -0.06)
+mesh = SubResource("Mesh_ChestTorso")
+
+[node name="Harness" type="MeshInstance3D" parent="ModelRoot"]
+transform = Transform3D(1, 0, 0, 0, 0.939693, 0.34202, 0, -0.34202, 0.939693, 0, 0.52, -0.06)
+mesh = SubResource("Mesh_ChestHarness")
+
+[node name="Hips" type="MeshInstance3D" parent="ModelRoot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.28, 0.08)
+mesh = SubResource("Mesh_Hips")
+
+[node name="ShoulderL" type="MeshInstance3D" parent="ModelRoot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.32, 0.62, -0.06)
+mesh = SubResource("Mesh_ShoulderPauldron")
+
+[node name="ShoulderR" type="MeshInstance3D" parent="ModelRoot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.32, 0.64, -0.06)
+mesh = SubResource("Mesh_ShoulderPauldron")
+
+[node name="Spine1" type="MeshInstance3D" parent="ModelRoot"]
+transform = Transform3D(1, 0, 0, 0, 0.939693, 0.34202, 0, -0.34202, 0.939693, 0, 0.74, -0.08)
+mesh = SubResource("Mesh_SpineRidge")
+
+[node name="Spine2" type="MeshInstance3D" parent="ModelRoot"]
+transform = Transform3D(1, 0, 0, 0, 0.939693, 0.34202, 0, -0.34202, 0.939693, 0, 0.65, 0.08)
+mesh = SubResource("Mesh_SpineRidge")
+
+[node name="Spine3" type="MeshInstance3D" parent="ModelRoot"]
+transform = Transform3D(1, 0, 0, 0, 0.939693, 0.34202, 0, -0.34202, 0.939693, 0, 0.52, 0.22)
+mesh = SubResource("Mesh_SpineRidge")
 
 [node name="HeadMesh" type="MeshInstance3D" parent="ModelRoot"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.95, -0.05)
-mesh = SubResource("Mesh_Head")
+transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 0.48, -0.32)
+mesh = SubResource("Mesh_MutantHead")
+
+[node name="SnoutMask" type="MeshInstance3D" parent="ModelRoot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.42, -0.44)
+mesh = SubResource("Mesh_SnoutMask")
+
+[node name="PunkMohawk" type="MeshInstance3D" parent="ModelRoot"]
+transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 0.68, -0.32)
+mesh = SubResource("Mesh_PunkMohawk")
 
 [node name="EyeMesh" type="MeshInstance3D" parent="ModelRoot"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.95, -0.28)
-mesh = SubResource("Mesh_Eyes")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -0.48)
+mesh = SubResource("Mesh_EyeSlit")
+
+[node name="ArmUpperL" type="MeshInstance3D" parent="ModelRoot"]
+transform = Transform3D(0.939693, 0.17101, 0.296198, 0, 0.866025, -0.5, -0.34202, 0.469846, 0.813798, -0.36, 0.46, -0.1)
+mesh = SubResource("Mesh_ArmUpper")
+
+[node name="FistL" type="MeshInstance3D" parent="ModelRoot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.38, 0.2, -0.26)
+mesh = SubResource("Mesh_HandFist")
+
+[node name="ArmUpperR" type="MeshInstance3D" parent="ModelRoot"]
+transform = Transform3D(0.939693, -0.17101, -0.296198, 0, 0.866025, -0.5, 0.34202, 0.469846, 0.813798, 0.36, 0.46, -0.1)
+mesh = SubResource("Mesh_ArmUpper")
+
+[node name="FistR" type="MeshInstance3D" parent="ModelRoot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.38, 0.2, -0.26)
+mesh = SubResource("Mesh_HandFist")
+
+[node name="WeaponMace" type="Node3D" parent="ModelRoot"]
+transform = Transform3D(0.866025, 0, 0.5, 0.433013, 0.5, -0.75, -0.25, 0.866025, 0.433013, 0.44, 0.38, -0.28)
+
+[node name="Handle" type="MeshInstance3D" parent="ModelRoot/WeaponMace"]
+mesh = SubResource("Mesh_MaceHandle")
+
+[node name="MaceHead" type="MeshInstance3D" parent="ModelRoot/WeaponMace"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.26, 0)
+mesh = SubResource("Mesh_MaceHead")
+
+[node name="SpikeTop" type="MeshInstance3D" parent="ModelRoot/WeaponMace"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.36, 0)
+mesh = SubResource("Mesh_MaceSpike")
+
+[node name="LegThighL" type="MeshInstance3D" parent="ModelRoot"]
+transform = Transform3D(1, 0, 0, 0, 0.965926, -0.258819, 0, 0.258819, 0.965926, -0.18, 0.18, 0.08)
+mesh = SubResource("Mesh_LegThigh")
+
+[node name="BootL" type="MeshInstance3D" parent="ModelRoot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.18, 0.06, 0.02)
+mesh = SubResource("Mesh_FootBoot")
+
+[node name="LegThighR" type="MeshInstance3D" parent="ModelRoot"]
+transform = Transform3D(1, 0, 0, 0, 0.965926, -0.258819, 0, 0.258819, 0.965926, 0.18, 0.18, 0.08)
+mesh = SubResource("Mesh_LegThigh")
+
+[node name="BootR" type="MeshInstance3D" parent="ModelRoot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.18, 0.06, 0.02)
+mesh = SubResource("Mesh_FootBoot")
 
 [node name="HealthBar" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.35, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.15, 0)
 
 [node name="BarBg" type="MeshInstance3D" parent="HealthBar"]
 mesh = SubResource("Mesh_HpBg")
@@ -76,5 +260,5 @@ collision_layer = 2
 collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0)
 shape = SubResource("Shape_EnemyCollider")

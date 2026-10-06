@@ -1,46 +1,111 @@
-[gd_scene load_steps=14 format=3 uid="uid://cunit01generic"]
+[gd_scene load_steps=29 format=3 uid="uid://cunit01generic"]
 
 [ext_resource type="Script" path="res://scripts/unit.gd" id="1_unit"]
 [ext_resource type="Resource" path="res://resources/rifleman_data.tres" id="2_data"]
 
-[sub_resource type="StandardMaterial3D" id="Mat_Torso"]
-albedo_color = Color(0.25, 0.38, 0.28, 1)
-roughness = 0.85
+[sub_resource type="StandardMaterial3D" id="Mat_TacticalBlue"]
+albedo_color = Color(0.18, 0.38, 0.65, 1)
+roughness = 0.65
+
+[sub_resource type="StandardMaterial3D" id="Mat_ArmorVest"]
+albedo_color = Color(0.16, 0.22, 0.3, 1)
+roughness = 0.75
 
 [sub_resource type="BoxMesh" id="Mesh_Torso"]
-material = SubResource("Mat_Torso")
-size = Vector3(0.42, 0.42, 0.32)
+material = SubResource("Mat_ArmorVest")
+size = Vector3(0.44, 0.38, 0.3)
 
-[sub_resource type="StandardMaterial3D" id="Mat_Helmet"]
-albedo_color = Color(0.18, 0.42, 0.58, 1)
-roughness = 0.6
+[sub_resource type="BoxMesh" id="Mesh_BeltPouch"]
+material = SubResource("Mat_ArmorVest")
+size = Vector3(0.46, 0.08, 0.32)
 
 [sub_resource type="SphereMesh" id="Mesh_Helmet"]
-material = SubResource("Mat_Helmet")
-radius = 0.25
-height = 0.36
-radial_segments = 10
-rings = 6
+material = SubResource("Mat_TacticalBlue")
+radius = 0.29
+height = 0.38
+radial_segments = 8
+rings = 4
 
-[sub_resource type="StandardMaterial3D" id="Mat_GunMetal"]
-albedo_color = Color(0.15, 0.16, 0.18, 1)
-roughness = 0.5
+[sub_resource type="BoxMesh" id="Mesh_HelmetVisor"]
+material = SubResource("Mat_TacticalBlue")
+size = Vector3(0.4, 0.07, 0.16)
 
-[sub_resource type="BoxMesh" id="Mesh_Rifle"]
-material = SubResource("Mat_GunMetal")
-size = Vector3(0.08, 0.1, 0.52)
+[sub_resource type="BoxMesh" id="Mesh_Earmuff"]
+material = SubResource("Mat_ArmorVest")
+size = Vector3(0.08, 0.12, 0.12)
+
+[sub_resource type="StandardMaterial3D" id="Mat_Goggles"]
+albedo_color = Color(0.08, 0.1, 0.14, 1)
+roughness = 0.25
+
+[sub_resource type="BoxMesh" id="Mesh_Goggles"]
+material = SubResource("Mat_Goggles")
+size = Vector3(0.34, 0.08, 0.05)
+
+[sub_resource type="StandardMaterial3D" id="Mat_Boots"]
+albedo_color = Color(0.12, 0.14, 0.18, 1)
+roughness = 0.8
+
+[sub_resource type="BoxMesh" id="Mesh_Boot"]
+material = SubResource("Mat_Boots")
+size = Vector3(0.18, 0.22, 0.24)
+
+[sub_resource type="BoxMesh" id="Mesh_Backpack"]
+material = SubResource("Mat_TacticalBlue")
+size = Vector3(0.3, 0.32, 0.14)
+
+[sub_resource type="BoxMesh" id="Mesh_ArmSleeve"]
+material = SubResource("Mat_TacticalBlue")
+size = Vector3(0.13, 0.24, 0.14)
+
+[sub_resource type="BoxMesh" id="Mesh_Glove"]
+material = SubResource("Mat_Boots")
+size = Vector3(0.11, 0.11, 0.14)
+
+[sub_resource type="StandardMaterial3D" id="Mat_CharcoalGun"]
+albedo_color = Color(0.12, 0.14, 0.18, 1)
+roughness = 0.45
+
+[sub_resource type="BoxMesh" id="Mesh_OversizedReceiver"]
+material = SubResource("Mat_CharcoalGun")
+size = Vector3(0.15, 0.2, 0.5)
+
+[sub_resource type="StandardMaterial3D" id="Mat_BrightSilverAlloy"]
+albedo_color = Color(0.42, 0.45, 0.5, 1)
+metallic = 0.1
+roughness = 0.95
+specular_mode = 2
+metallic_specular = 0.0
+
+[sub_resource type="CylinderMesh" id="Mesh_OversizedBarrel"]
+material = SubResource("Mat_BrightSilverAlloy")
+top_radius = 0.065
+bottom_radius = 0.065
+height = 0.48
+radial_segments = 6
+
+[sub_resource type="CylinderMesh" id="Mesh_MuzzleBrake"]
+material = SubResource("Mat_BrightSilverAlloy")
+top_radius = 0.09
+bottom_radius = 0.065
+height = 0.12
+radial_segments = 6
+
+[sub_resource type="BoxMesh" id="Mesh_OversizedMag"]
+material = SubResource("Mat_CharcoalGun")
+size = Vector3(0.08, 0.22, 0.16)
 
 [sub_resource type="StandardMaterial3D" id="Mat_SelectionGlow"]
 albedo_color = Color(1, 0.85, 0.2, 1)
 emission_enabled = true
 emission = Color(1, 0.85, 0.2, 1)
-emission_energy_multiplier = 2.0
+emission_energy_multiplier = 1.8
 
 [sub_resource type="TorusMesh" id="Mesh_SelectionRing"]
 material = SubResource("Mat_SelectionGlow")
 inner_radius = 0.42
 outer_radius = 0.5
-rings = 12
+rings = 10
 ring_segments = 4
 
 [sub_resource type="CylinderShape3D" id="Shape_UnitCollider"]
@@ -52,37 +117,88 @@ script = ExtResource("1_unit")
 data = ExtResource("2_data")
 
 [node name="ModelRoot" type="Node3D" parent="."]
+transform = Transform3D(1.08, 0, 0, 0, 1.08, 0, 0, 0, 1.08, 0, 0, 0)
 
 [node name="LegL" type="MeshInstance3D" parent="ModelRoot"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.12, 0.14, 0)
-mesh = SubResource("Mesh_Torso")
-skeleton = NodePath("../..")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.16, 0.11, 0)
+mesh = SubResource("Mesh_Boot")
 
 [node name="LegR" type="MeshInstance3D" parent="ModelRoot"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.12, 0.14, 0)
-mesh = SubResource("Mesh_Torso")
-skeleton = NodePath("../..")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.16, 0.11, 0)
+mesh = SubResource("Mesh_Boot")
 
 [node name="TorsoMesh" type="MeshInstance3D" parent="ModelRoot"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.46, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.44, 0)
 mesh = SubResource("Mesh_Torso")
 
+[node name="Belt" type="MeshInstance3D" parent="ModelRoot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.26, 0)
+mesh = SubResource("Mesh_BeltPouch")
+
+[node name="Backpack" type="MeshInstance3D" parent="ModelRoot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.46, 0.19)
+mesh = SubResource("Mesh_Backpack")
+
 [node name="HelmetMesh" type="MeshInstance3D" parent="ModelRoot"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.78, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.77, 0)
 mesh = SubResource("Mesh_Helmet")
 
-[node name="WeaponPivot" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.18, 0.44, 0.1)
+[node name="VisorBrim" type="MeshInstance3D" parent="ModelRoot"]
+transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 0.75, -0.19)
+mesh = SubResource("Mesh_HelmetVisor")
 
-[node name="WeaponMesh" type="MeshInstance3D" parent="WeaponPivot"]
+[node name="EarmuffL" type="MeshInstance3D" parent="ModelRoot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.28, 0.76, 0)
+mesh = SubResource("Mesh_Earmuff")
+
+[node name="EarmuffR" type="MeshInstance3D" parent="ModelRoot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.28, 0.76, 0)
+mesh = SubResource("Mesh_Earmuff")
+
+[node name="Goggles" type="MeshInstance3D" parent="ModelRoot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, -0.2)
+mesh = SubResource("Mesh_Goggles")
+
+[node name="ArmL" type="MeshInstance3D" parent="ModelRoot"]
+transform = Transform3D(0.866025, 0, 0.5, 0.25, 0.866025, -0.433013, -0.433013, 0.5, 0.75, -0.26, 0.44, -0.1)
+mesh = SubResource("Mesh_ArmSleeve")
+
+[node name="HandL" type="MeshInstance3D" parent="ModelRoot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.06, 0.38, -0.32)
+mesh = SubResource("Mesh_Glove")
+
+[node name="ArmR" type="MeshInstance3D" parent="ModelRoot"]
+transform = Transform3D(0.965926, 0, -0.258819, -0.12941, 0.866025, -0.482963, 0.224144, 0.5, 0.836516, 0.26, 0.44, -0.05)
+mesh = SubResource("Mesh_ArmSleeve")
+
+[node name="HandR" type="MeshInstance3D" parent="ModelRoot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 0.4, -0.16)
+mesh = SubResource("Mesh_Glove")
+
+[node name="WeaponPivot" type="Node3D" parent="ModelRoot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.16, 0.42, 0)
+
+[node name="WeaponMesh" type="MeshInstance3D" parent="ModelRoot/WeaponPivot"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.15)
-mesh = SubResource("Mesh_Rifle")
+mesh = SubResource("Mesh_OversizedReceiver")
 
-[node name="MuzzlePoint" type="Marker3D" parent="WeaponPivot"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.42)
+[node name="Barrel" type="MeshInstance3D" parent="ModelRoot/WeaponPivot"]
+transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 0.02, -0.65)
+mesh = SubResource("Mesh_OversizedBarrel")
+
+[node name="MuzzleBrake" type="MeshInstance3D" parent="ModelRoot/WeaponPivot"]
+transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 0.02, -0.92)
+mesh = SubResource("Mesh_MuzzleBrake")
+
+[node name="Magazine" type="MeshInstance3D" parent="ModelRoot/WeaponPivot"]
+transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, -0.18, -0.22)
+mesh = SubResource("Mesh_OversizedMag")
+
+[node name="MuzzlePoint" type="Marker3D" parent="ModelRoot/WeaponPivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.02, -1.0)
 
 [node name="LevelLabel" type="Label3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.34, 0)
 billboard = 1
 double_sided = false
 text = "Lv.1"

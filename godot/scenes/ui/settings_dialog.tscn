@@ -1,0 +1,337 @@
+[gd_scene load_steps=7 format=3 uid="uid://csettingsdlg01"]
+
+[ext_resource type="Script" path="res://scripts/settings_dialog.gd" id="1_settings"]
+
+[sub_resource type="StyleBoxFlat" id="Style_CenterCard"]
+bg_color = Color(0.12, 0.14, 0.19, 0.98)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 4
+border_color = Color(0.04, 0.04, 0.05, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+shadow_color = Color(0, 0, 0, 0.6)
+shadow_size = 6
+shadow_offset = Vector2(4, 4)
+
+[sub_resource type="StyleBoxFlat" id="Style_TitleBadge"]
+bg_color = Color(0.96, 0.88, 0.15, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.05, 0.05, 0.05, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="Style_SecondaryBtn"]
+bg_color = Color(0.2, 0.23, 0.29, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.05, 0.05, 0.05, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="Style_ApplyBtn"]
+bg_color = Color(0.85, 0.96, 0.22, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 4
+border_color = Color(0.05, 0.05, 0.05, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="Style_WipeBtn"]
+bg_color = Color(0.85, 0.2, 0.2, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 3
+border_color = Color(0.05, 0.05, 0.05, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[node name="SettingsDialog" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_settings")
+
+[node name="Dimmer" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.05, 0.06, 0.08, 0.9)
+
+[node name="SafeContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterCard" type="PanelContainer" parent="SafeContainer"]
+custom_minimum_size = Vector2(340, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("Style_CenterCard")
+
+[node name="Margin" type="MarginContainer" parent="SafeContainer/CenterCard"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBox" type="VBoxContainer" parent="SafeContainer/CenterCard/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="TitleBadge" type="PanelContainer" parent="SafeContainer/CenterCard/Margin/VBox"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_styles/panel = SubResource("Style_TitleBadge")
+
+[node name="Margin" type="MarginContainer" parent="SafeContainer/CenterCard/Margin/VBox/TitleBadge"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 6
+
+[node name="Label" type="Label" parent="SafeContainer/CenterCard/Margin/VBox/TitleBadge/Margin"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.05, 0.05, 0.05, 1)
+theme_override_font_sizes/font_size = 15
+text = "⚙️ SETTINGS"
+
+[node name="LanguageRow" type="HBoxContainer" parent="SafeContainer/CenterCard/Margin/VBox"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="SafeContainer/CenterCard/Margin/VBox/LanguageRow"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+text = "LANGUAGE"
+
+[node name="Spacer" type="Control" parent="SafeContainer/CenterCard/Margin/VBox/LanguageRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="BtnRow" type="HBoxContainer" parent="SafeContainer/CenterCard/Margin/VBox/LanguageRow"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="EnglishBtn" type="Button" parent="SafeContainer/CenterCard/Margin/VBox/LanguageRow/BtnRow"]
+custom_minimum_size = Vector2(70, 30)
+layout_mode = 2
+theme_override_font_sizes/font_size = 11
+theme_override_styles/normal = SubResource("Style_SecondaryBtn")
+text = "ENGLISH"
+
+[node name="TurkishBtn" type="Button" parent="SafeContainer/CenterCard/Margin/VBox/LanguageRow/BtnRow"]
+custom_minimum_size = Vector2(70, 30)
+layout_mode = 2
+theme_override_font_sizes/font_size = 11
+theme_override_styles/normal = SubResource("Style_SecondaryBtn")
+text = "TÜRKÇE"
+
+[node name="MasterVolSection" type="VBoxContainer" parent="SafeContainer/CenterCard/Margin/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="HeaderRow" type="HBoxContainer" parent="SafeContainer/CenterCard/Margin/VBox/MasterVolSection"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="SafeContainer/CenterCard/Margin/VBox/MasterVolSection/HeaderRow"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "MASTER VOLUME"
+
+[node name="Spacer" type="Control" parent="SafeContainer/CenterCard/Margin/VBox/MasterVolSection/HeaderRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PercentLabel" type="Label" parent="SafeContainer/CenterCard/Margin/VBox/MasterVolSection/HeaderRow"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "100%"
+
+[node name="Slider" type="HSlider" parent="SafeContainer/CenterCard/Margin/VBox/MasterVolSection"]
+layout_mode = 2
+value = 100.0
+
+[node name="SfxVolSection" type="VBoxContainer" parent="SafeContainer/CenterCard/Margin/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="HeaderRow" type="HBoxContainer" parent="SafeContainer/CenterCard/Margin/VBox/SfxVolSection"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="SafeContainer/CenterCard/Margin/VBox/SfxVolSection/HeaderRow"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "SFX VOLUME"
+
+[node name="Spacer" type="Control" parent="SafeContainer/CenterCard/Margin/VBox/SfxVolSection/HeaderRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PercentLabel" type="Label" parent="SafeContainer/CenterCard/Margin/VBox/SfxVolSection/HeaderRow"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "100%"
+
+[node name="Slider" type="HSlider" parent="SafeContainer/CenterCard/Margin/VBox/SfxVolSection"]
+layout_mode = 2
+value = 100.0
+
+[node name="VibrationRow" type="HBoxContainer" parent="SafeContainer/CenterCard/Margin/VBox"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="SafeContainer/CenterCard/Margin/VBox/VibrationRow"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+text = "VIBRATION & HAPTICS"
+
+[node name="Spacer" type="Control" parent="SafeContainer/CenterCard/Margin/VBox/VibrationRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Toggle" type="CheckButton" parent="SafeContainer/CenterCard/Margin/VBox/VibrationRow"]
+layout_mode = 2
+button_pressed = true
+
+[node name="DamageRow" type="HBoxContainer" parent="SafeContainer/CenterCard/Margin/VBox"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="SafeContainer/CenterCard/Margin/VBox/DamageRow"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+text = "DAMAGE NUMBERS"
+
+[node name="Spacer" type="Control" parent="SafeContainer/CenterCard/Margin/VBox/DamageRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Toggle" type="CheckButton" parent="SafeContainer/CenterCard/Margin/VBox/DamageRow"]
+layout_mode = 2
+button_pressed = true
+
+[node name="ResetButton" type="Button" parent="SafeContainer/CenterCard/Margin/VBox"]
+custom_minimum_size = Vector2(0, 38)
+layout_mode = 2
+theme_override_styles/normal = SubResource("Style_SecondaryBtn")
+
+[node name="Label" type="Label" parent="SafeContainer/CenterCard/Margin/VBox/ResetButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.95, 0.4, 0.4, 1)
+theme_override_font_sizes/font_size = 12
+text = "🗑️ RESET ALL PROGRESS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ApplyButton" type="Button" parent="SafeContainer/CenterCard/Margin/VBox"]
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+theme_override_styles/normal = SubResource("Style_ApplyBtn")
+
+[node name="Label" type="Label" parent="SafeContainer/CenterCard/Margin/VBox/ApplyButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.05, 0.05, 0.05, 1)
+theme_override_font_sizes/font_size = 14
+text = "✓ APPLY & CLOSE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ConfirmDialog" type="PanelContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -80.0
+offset_right = 150.0
+offset_bottom = 80.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("Style_CenterCard")
+
+[node name="Margin" type="MarginContainer" parent="ConfirmDialog"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBox" type="VBoxContainer" parent="ConfirmDialog/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Title" type="Label" parent="ConfirmDialog/Margin/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.95, 0.35, 0.35, 1)
+theme_override_font_sizes/font_size = 14
+text = "WIPE SAVE DATA?"
+horizontal_alignment = 1
+
+[node name="Desc" type="Label" parent="ConfirmDialog/Margin/VBox"]
+custom_minimum_size = Vector2(240, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8, 0.85, 0.9, 1)
+theme_override_font_sizes/font_size = 11
+text = "This will permanently reset all Scrap, high scores, and permanent upgrades."
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="BtnRow" type="HBoxContainer" parent="ConfirmDialog/Margin/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="CancelButton" type="Button" parent="ConfirmDialog/Margin/VBox/BtnRow"]
+custom_minimum_size = Vector2(0, 36)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("Style_SecondaryBtn")
+text = "CANCEL"
+
+[node name="WipeButton" type="Button" parent="ConfirmDialog/Margin/VBox/BtnRow"]
+custom_minimum_size = Vector2(0, 36)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("Style_WipeBtn")
+text = "WIPE DATA"
