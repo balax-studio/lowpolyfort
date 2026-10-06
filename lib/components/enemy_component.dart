@@ -323,21 +323,22 @@ class EnemyComponent extends PositionComponent with HasGameReference<BaseDefense
 
     switch (definition.type) {
       case EnemyType.runner:
-        bobY = sin(_walkCycle * 5.5) * 2.8;
-        leanAngle = 0.10; // Forward lean
+        bobY = sin(_walkCycle * 6.0) * 3.2;
+        leanAngle = 0.22; // Distinct forward aggressive lean (Clause 1065)
         break;
       case EnemyType.tank:
-        bobY = sin(_walkCycle * 2.5) * 1.5;
-        swayX = sin(_walkCycle * 1.25) * 2.2; // Heavy sway
+        bobY = sin(_walkCycle * 2.2) * 1.6;
+        swayX = sin(_walkCycle * 1.1) * 3.2; // Heavy armor lateral sway
         break;
       case EnemyType.swarm:
-        bobY = -sin(_walkCycle * 7.0).abs() * 3.5; // Bouncy hop
+        bobY = -sin(_walkCycle * 8.0).abs() * 4.5; // Rapid skitter/hop
         break;
       case EnemyType.shielded:
         bobY = sin(_walkCycle * 3.5) * 2.0;
         break;
       case EnemyType.boss:
-        bobY = sin(_walkCycle * 2.2) * 3.0; // Heavy step
+        bobY = sin(_walkCycle * 2.0) * 3.5; // Heavy stomping gait
+        swayX = sin(_walkCycle * 1.0) * 2.2;
         break;
       case EnemyType.basic:
         bobY = sin(_walkCycle * 4.0) * 2.0; // Balanced walk
@@ -349,10 +350,10 @@ class EnemyComponent extends PositionComponent with HasGameReference<BaseDefense
       canvas.rotate(leanAngle);
     }
 
-    // Hit squash presentation (Clause 746: +3% X, -3% Y)
+    // Hit squash presentation (Clause 746, 1080: tangible impact reaction)
     if (_hitSquashTimer > 0) {
       final t = _hitSquashTimer / VisualFeedbackConfig.hitSquashDuration;
-      final amp = (definition.type == EnemyType.boss || definition.type == EnemyType.tank) ? 0.015 : 0.035;
+      final amp = (definition.type == EnemyType.boss || definition.type == EnemyType.tank) ? 0.025 : 0.055;
       canvas.scale(1.0 + (amp * t), 1.0 - (amp * t));
     }
 
@@ -409,12 +410,16 @@ class EnemyComponent extends PositionComponent with HasGameReference<BaseDefense
 
       canvas.drawImageRect(sheetImg, srcRect, dstRect, spritePaint);
 
-      // 3. Shield Visual (Clause 941)
+      // 3. Shield Visual (Clause 941, 1065)
       if (enemyDef.shieldAsset != null && currentShield > 0 && !_isDying) {
         final shieldImg = ArtAssetManager.getImage(enemyDef.shieldAsset!);
         if (shieldImg != null) {
           final sSrc = Rect.fromLTWH(0, 0, shieldImg.width.toDouble(), shieldImg.height.toDouble());
-          final sDst = Rect.fromCenter(center: const Offset(0, 6), width: enemyDef.visualSize.x * 0.65, height: enemyDef.visualSize.y * 0.65);
+          final sDst = Rect.fromCenter(
+            center: const Offset(0, 4),
+            width: enemyDef.visualSize.x * 0.82,
+            height: enemyDef.visualSize.y * 0.82,
+          );
           canvas.drawImageRect(shieldImg, sSrc, sDst, Paint()..filterQuality = FilterQuality.medium);
         }
       }

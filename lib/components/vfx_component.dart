@@ -56,15 +56,19 @@ class DeathPuffVFXComponent extends PositionComponent {
           position: position,
           priority: 75,
         ) {
-    final count = isLarge ? 14 : 7;
+    final count = isLarge ? 14 : 8;
     final random = Random();
     _particles = List.generate(count, (i) {
       final angle = random.nextDouble() * 2 * pi;
-      final speed = 30.0 + random.nextDouble() * (isLarge ? 90.0 : 50.0);
-      final size = 4.0 + random.nextDouble() * (isLarge ? 8.0 : 4.0);
+      final speed = 40.0 + random.nextDouble() * (isLarge ? 90.0 : 60.0);
+      final size = 3.5 + random.nextDouble() * (isLarge ? 7.0 : 3.5);
+      final isShard = i % 2 == 0;
       return _PuffParticle(
         velocity: Offset(cos(angle) * speed, sin(angle) * speed),
         initialSize: size,
+        rotation: random.nextDouble() * pi,
+        rotSpeed: (random.nextDouble() - 0.5) * 10.0,
+        isShard: isShard,
       );
     });
   }
@@ -73,7 +77,7 @@ class DeathPuffVFXComponent extends PositionComponent {
   void update(double dt) {
     super.update(dt);
     _elapsed += dt;
-    final maxDur = isLarge ? 0.45 : 0.32;
+    final maxDur = isLarge ? 0.35 : 0.24;
     if (_elapsed >= maxDur) {
       removeFromParent();
     }
@@ -82,26 +86,46 @@ class DeathPuffVFXComponent extends PositionComponent {
   @override
   void render(Canvas canvas) {
     super.render(canvas);
-    final maxDur = isLarge ? 0.45 : 0.32;
+    final maxDur = isLarge ? 0.35 : 0.24;
     final p = (_elapsed / maxDur).clamp(0.0, 1.0);
+    final alpha = (1.0 - p).clamp(0.0, 1.0);
 
     for (final part in _particles) {
       final currentPos = part.velocity * _elapsed;
-      final currentSize = part.initialSize * (1.0 - p);
+      final currentSize = part.initialSize * (1.0 - p * 0.7);
 
-      final paint = Paint()
-        ..color = color.withValues(alpha: 1.0 - p)
-        ..style = PaintingStyle.fill;
+      canvas.save();
+      canvas.translate(currentPos.dx, currentPos.dy);
+      canvas.rotate(part.rotation + part.rotSpeed * _elapsed);
 
-      canvas.drawCircle(currentPos, currentSize, paint);
-      canvas.drawCircle(
-        currentPos,
-        currentSize,
-        Paint()
-          ..color = GameColors.ink.withValues(alpha: (1.0 - p) * 0.5)
-          ..style = PaintingStyle.stroke
-          ..strokeWidth = 1.2,
-      );
+      if (part.isShard) {
+        // Faceted low-poly debris shard (Clause 1081)
+        final shardRect = Rect.fromCenter(
+          center: Offset.zero,
+          width: currentSize * 1.6,
+          height: currentSize * 1.6,
+        );
+        final paint = Paint()
+          ..color = color.withValues(alpha: alpha)
+          ..style = PaintingStyle.fill;
+        canvas.drawRect(shardRect, paint);
+        canvas.drawRect(
+          shardRect,
+          Paint()
+            ..color = GameColors.ink.withValues(alpha: alpha * 0.6)
+            ..style = PaintingStyle.stroke
+            ..strokeWidth = 1.0,
+        );
+      } else {
+        // Soft impact dust puff
+        final dustColor = Color.lerp(color, const Color(0xFFCBD5E1), 0.5)!;
+        final paint = Paint()
+          ..color = dustColor.withValues(alpha: alpha * 0.7)
+          ..style = PaintingStyle.fill;
+        canvas.drawCircle(Offset.zero, currentSize, paint);
+      }
+
+      canvas.restore();
     }
   }
 }
@@ -109,7 +133,16 @@ class DeathPuffVFXComponent extends PositionComponent {
 class _PuffParticle {
   final Offset velocity;
   final double initialSize;
-  _PuffParticle({required this.velocity, required this.initialSize});
+  final double rotation;
+  final double rotSpeed;
+  final bool isShard;
+  _PuffParticle({
+    required this.velocity,
+    required this.initialSize,
+    required this.rotation,
+    required this.rotSpeed,
+    required this.isShard,
+  });
 }
 
 /// Saturated white/cyan/yellow radial burst when two units are merged (Clauses 761–766).

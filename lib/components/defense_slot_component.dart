@@ -86,17 +86,18 @@ class DefenseSlotComponent extends PositionComponent {
       canvas.save();
       canvas.scale(perspectiveScale);
 
-      // Contact shadow below pad
+      // Contact shadow below pad (Clause 1072: integrated with terrain)
       IsometricHelper.drawDropShadow(
         canvas: canvas,
-        center: Offset(0, h * 0.12),
-        radiusX: w * 0.50,
-        radiusY: h * 0.40,
-        opacity: 0.25,
+        center: Offset(0, h * 0.10),
+        radiusX: w * 0.44,
+        radiusY: h * 0.35,
+        opacity: 0.18,
       );
 
       final src = Rect.fromLTWH(0, 0, padImg.width.toDouble(), padImg.height.toDouble());
-      final dst = Rect.fromCenter(center: Offset.zero, width: w * 1.25, height: h * 1.25);
+      // Calibrated to 1.05x so unit (1.20x - 1.35x) visually dominates the pad (Clauses 1060, 1062)
+      final dst = Rect.fromCenter(center: Offset.zero, width: w * 1.05, height: h * 1.05);
       final padPaint = Paint()
         ..filterQuality = FilterQuality.medium
         ..color = (!isEmpty) ? Colors.white.withValues(alpha: 0.85) : Colors.white;

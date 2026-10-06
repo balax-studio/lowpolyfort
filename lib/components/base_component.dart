@@ -20,10 +20,10 @@ class BaseComponent extends PositionComponent with HasGameReference<BaseDefenseG
 
   BaseComponent()
       : super(
-          position: Vector2(GameConfig.virtualWidth / 2, 730),
+          position: Vector2(GameConfig.virtualWidth / 2, 748),
           size: Vector2(GameConfig.baseWidth, GameConfig.baseHeight),
           anchor: Anchor.center,
-          priority: 50,
+          priority: 5, // Behind pads (priority 10) and heroes (priority 20) per Clause 1068
         );
 
   void triggerDamageFlash() {
@@ -105,7 +105,8 @@ class BaseComponent extends PositionComponent with HasGameReference<BaseDefenseG
     final baseImg = ArtAssetManager.getImage(WorldArtAssets.mainBase);
     if (baseImg != null) {
       final src = Rect.fromLTWH(0, 0, baseImg.width.toDouble(), baseImg.height.toDouble());
-      final dst = Rect.fromCenter(center: Offset.zero, width: w * 1.15, height: h * 1.55);
+      // Calibrated to 384px width (fits within 450px canvas without clipping) and 125px height (behind Row 2 slots)
+      final dst = Rect.fromCenter(center: Offset.zero, width: 384.0, height: 125.0);
       final paint = Paint()
         ..filterQuality = FilterQuality.medium
         ..color = (_damageFlashTimer > 0)
@@ -119,7 +120,7 @@ class BaseComponent extends PositionComponent with HasGameReference<BaseDefenseG
         final pulseFreq = isLowHp ? 10.0 : 4.0;
         final alpha = 0.35 + (sin(_ambientTimer * pulseFreq).abs() * 0.65);
         final lightPaint = Paint()..color = Colors.white.withValues(alpha: alpha);
-        final lDst = Rect.fromCenter(center: Offset(0, -h * 0.58), width: 28, height: 28);
+        final lDst = Rect.fromCenter(center: const Offset(0, -52), width: 24, height: 24);
         canvas.drawImageRect(lightImg, Rect.fromLTWH(0, 0, lightImg.width.toDouble(), lightImg.height.toDouble()), lDst, lightPaint);
       }
     } else {

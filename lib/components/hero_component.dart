@@ -249,23 +249,23 @@ class HeroComponent extends PositionComponent
     final finalRate = baseSpeed * speedMultiplier * modeMultiplier;
     _attackCooldown = 1.0 / max(0.2, finalRate);
 
-    // Archetype-tailored kickback and muzzle flash (Clauses 740–743)
+    // Archetype-tailored kickback and muzzle flash (Clauses 740–743, 1078, 1079)
     switch (heroClass) {
       case HeroClass.rifleman:
         _muzzleFlashTimer = VisualFeedbackConfig.riflemanFlashDuration;
-        _recoilDistance = 3.0;
+        _recoilDistance = 4.0;
         break;
       case HeroClass.shotgunner:
         _muzzleFlashTimer = VisualFeedbackConfig.shotgunnerFlashDuration;
-        _recoilDistance = 6.0;
+        _recoilDistance = 7.5;
         break;
       case HeroClass.sniper:
         _muzzleFlashTimer = VisualFeedbackConfig.sniperFlashDuration;
-        _recoilDistance = 5.0;
+        _recoilDistance = 11.0;
         break;
       case HeroClass.heavyGunner:
         _muzzleFlashTimer = VisualFeedbackConfig.heavyFlashDuration;
-        _recoilDistance = 2.0;
+        _recoilDistance = 2.5;
         break;
     }
 
@@ -450,6 +450,23 @@ class HeroComponent extends PositionComponent
     _returnStartPos = position.clone();
   }
 
+  /// Row-based visual scale per Clause 1061:
+  /// back row (0): +20% (1.20)
+  /// middle row (1): +28% (1.28)
+  /// front row (2): +35% (1.35)
+  double get visualRowScale {
+    switch (slot.gridRow) {
+      case 0:
+        return 1.20;
+      case 1:
+        return 1.28;
+      case 2:
+        return 1.35;
+      default:
+        return 1.25;
+    }
+  }
+
   // --- 2.5D LOW-POLY RENDERING ---
   @override
   void render(Canvas canvas) {
@@ -457,6 +474,7 @@ class HeroComponent extends PositionComponent
 
     final w = size.x;
     final h = size.y;
+    final rowScale = visualRowScale;
 
     // Idle breathing offset (Clause 736: 2–3px vertical movement)
     final idleBobY = isDragging
@@ -477,15 +495,15 @@ class HeroComponent extends PositionComponent
       canvas.drawOval(
         Rect.fromCenter(
           center: Offset(0, 10 + (isDragging ? 8.0 : 0.0)),
-          width: unitDef.shadowSize.x * shadowScale,
-          height: unitDef.shadowSize.y * shadowScale,
+          width: unitDef.shadowSize.x * shadowScale * rowScale,
+          height: unitDef.shadowSize.y * shadowScale * rowScale,
         ),
         Paint()..color = const Color(0xFF1A1D24).withValues(alpha: shadowOpacity),
       );
 
       // Merge candidate pulse
       if (isMergeCandidate && !isDragging) {
-        final pulseRadius = 30.0 + (sin(_candidatePulse).abs() * 5.0);
+        final pulseRadius = 32.0 * rowScale + (sin(_candidatePulse).abs() * 5.0);
         final pulsePaint = Paint()
           ..color = GameColors.acidYellow
           ..style = PaintingStyle.stroke
@@ -494,6 +512,7 @@ class HeroComponent extends PositionComponent
       }
 
       canvas.save();
+      canvas.scale(rowScale);
       canvas.translate(0, idleBobY + elevY);
       if (_dragTilt != 0.0) {
         canvas.rotate(_dragTilt);
@@ -528,8 +547,29 @@ class HeroComponent extends PositionComponent
           canvas.translate(0, _recoilDistance);
         }
 
+        double wpnW = unitDef.bodySize.x * 0.55;
+        double wpnH = unitDef.bodySize.y * 0.55;
+        switch (heroClass) {
+          case HeroClass.rifleman:
+            wpnW = unitDef.bodySize.x * 0.52;
+            wpnH = unitDef.bodySize.y * 0.56;
+            break;
+          case HeroClass.shotgunner:
+            wpnW = unitDef.bodySize.x * 0.65;
+            wpnH = unitDef.bodySize.y * 0.48;
+            break;
+          case HeroClass.sniper:
+            wpnW = unitDef.bodySize.x * 0.42;
+            wpnH = unitDef.bodySize.y * 0.72;
+            break;
+          case HeroClass.heavyGunner:
+            wpnW = unitDef.bodySize.x * 0.70;
+            wpnH = unitDef.bodySize.y * 0.64;
+            break;
+        }
+
         final wpnSrc = Rect.fromLTWH(0, 0, weaponImg.width.toDouble(), weaponImg.height.toDouble());
-        final wpnDst = Rect.fromCenter(center: Offset.zero, width: unitDef.bodySize.x * 0.55, height: unitDef.bodySize.y * 0.55);
+        final wpnDst = Rect.fromCenter(center: Offset.zero, width: wpnW, height: wpnH);
         canvas.drawImageRect(weaponImg, wpnSrc, wpnDst, Paint()..filterQuality = FilterQuality.medium);
 
         if (_muzzleFlashTimer > 0) {
@@ -540,7 +580,7 @@ class HeroComponent extends PositionComponent
         canvas.restore();
       }
 
-      // 5. Level & Tier Star Badge (Clause 929)
+      // 5. Level & Tier Star Badge (Clause 929, 1064)
       _drawLevelBadge(canvas, w, h);
 
       canvas.restore();
@@ -550,14 +590,14 @@ class HeroComponent extends PositionComponent
       IsometricHelper.drawDropShadow(
         canvas: canvas,
         center: Offset(0, h * 0.35 + (isDragging ? 8.0 : 0.0)),
-        radiusX: (w * 0.42) * shadowScale,
-        radiusY: (h * 0.22) * shadowScale,
+        radiusX: (w * 0.42) * shadowScale * rowScale,
+        radiusY: (h * 0.22) * shadowScale * rowScale,
         opacity: isDragging ? 0.20 : 0.28,
       );
 
       // Clause 67: Pulsing merge highlight contour when another identical unit is dragged
       if (isMergeCandidate && !isDragging) {
-        final pulseRadius = 26.0 + (sin(_candidatePulse).abs() * 4.0);
+        final pulseRadius = (26.0 * rowScale) + (sin(_candidatePulse).abs() * 4.0);
         final pulsePaint = Paint()
           ..color = GameColors.acidYellow
           ..style = PaintingStyle.stroke
@@ -567,6 +607,7 @@ class HeroComponent extends PositionComponent
 
       // Wrap soldier & weapon in idle bob, drag elevation, and drag inertial tilt
       canvas.save();
+      canvas.scale(rowScale);
       canvas.translate(0, idleBobY + elevY);
       if (_dragTilt != 0.0) {
         canvas.rotate(_dragTilt);
@@ -736,56 +777,116 @@ class HeroComponent extends PositionComponent
   }
 
   void _drawMuzzleStar(Canvas canvas, Offset center) {
+    // Clause 1078: Archetype-specific muzzle flash geometry
     final flashPaint = Paint()..color = GameColors.muzzleFlash;
-    final star = Path();
-    const spikes = 5;
-    const outerR = 12.0;
-    const innerR = 5.0;
+    final corePaint = Paint()..color = Colors.white;
 
-    for (int i = 0; i < spikes * 2; i++) {
-      final r = (i % 2 == 0) ? outerR : innerR;
-      final angle = (i * pi) / spikes;
-      final x = center.dx + cos(angle) * r;
-      final y = center.dy + sin(angle) * r;
-      if (i == 0) {
-        star.moveTo(x, y);
-      } else {
-        star.lineTo(x, y);
-      }
+    switch (heroClass) {
+      case HeroClass.rifleman:
+        // Balanced 5-point star
+        final star = Path();
+        const spikes = 5;
+        const outerR = 14.0;
+        const innerR = 5.5;
+        for (int i = 0; i < spikes * 2; i++) {
+          final r = (i % 2 == 0) ? outerR : innerR;
+          final angle = (i * pi) / spikes;
+          final x = center.dx + cos(angle) * r;
+          final y = center.dy + sin(angle) * r;
+          if (i == 0) {
+            star.moveTo(x, y);
+          } else {
+            star.lineTo(x, y);
+          }
+        }
+        star.close();
+        canvas.drawPath(star, flashPaint);
+        canvas.drawCircle(center, 4.0, corePaint);
+        break;
+
+      case HeroClass.shotgunner:
+        // Wide fan blast
+        final fan = Path()
+          ..moveTo(center.dx - 12, center.dy)
+          ..lineTo(center.dx - 16, center.dy - 16)
+          ..lineTo(center.dx - 4, center.dy - 12)
+          ..lineTo(center.dx, center.dy - 20)
+          ..lineTo(center.dx + 4, center.dy - 12)
+          ..lineTo(center.dx + 16, center.dy - 16)
+          ..lineTo(center.dx + 12, center.dy)
+          ..close();
+        canvas.drawPath(fan, flashPaint);
+        canvas.drawCircle(center, 5.0, corePaint);
+        break;
+
+      case HeroClass.sniper:
+        // Long precision needle flash
+        final needle = Path()
+          ..moveTo(center.dx - 3, center.dy)
+          ..lineTo(center.dx, center.dy - 24)
+          ..lineTo(center.dx + 3, center.dy)
+          ..lineTo(center.dx, center.dy + 4)
+          ..close();
+        canvas.drawPath(needle, flashPaint);
+        canvas.drawCircle(center, 3.5, corePaint);
+        break;
+
+      case HeroClass.heavyGunner:
+        // Compact rapid starburst
+        final star = Path();
+        const spikes = 4;
+        const outerR = 10.0;
+        const innerR = 4.0;
+        for (int i = 0; i < spikes * 2; i++) {
+          final r = (i % 2 == 0) ? outerR : innerR;
+          final angle = (i * pi) / spikes;
+          final x = center.dx + cos(angle) * r;
+          final y = center.dy + sin(angle) * r;
+          if (i == 0) {
+            star.moveTo(x, y);
+          } else {
+            star.lineTo(x, y);
+          }
+        }
+        star.close();
+        canvas.drawPath(star, flashPaint);
+        canvas.drawCircle(center, 3.0, corePaint);
+        break;
     }
-    star.close();
-    canvas.drawPath(star, flashPaint);
   }
 
   void _drawLevelBadge(Canvas canvas, double w, double h) {
-    final badgeRect = Rect.fromCenter(center: Offset(0, h * 0.38), width: 34, height: 16);
-    final badgeRRect = RRect.fromRectAndRadius(badgeRect, const Radius.circular(4));
+    // Clause 1064: Compact military rank insignia pill, muted so it never overpowers the unit
+    final badgeRect = Rect.fromCenter(center: Offset(0, h * 0.38), width: 22, height: 12);
+    final badgeRRect = RRect.fromRectAndRadius(badgeRect, const Radius.circular(3));
 
-    // Color increases in prestige with level
-    Color badgeColor = GameColors.surface;
+    // Muted tactical border per tier
+    Color tierBorder = Colors.white.withValues(alpha: 0.35);
     if (level >= 7) {
-      badgeColor = GameColors.cyberPurple;
+      tierBorder = GameColors.cyberPurple;
     } else if (level >= 5) {
-      badgeColor = GameColors.acidYellow;
+      tierBorder = GameColors.acidYellow;
     } else if (level >= 3) {
-      badgeColor = GameColors.electricLime;
+      tierBorder = GameColors.electricLime;
     }
 
-    canvas.drawRRect(badgeRRect, Paint()..color = badgeColor);
-    canvas.drawRRect(
-      badgeRRect,
-      Paint()
-        ..color = GameColors.ink
-        ..style = PaintingStyle.stroke
-        ..strokeWidth = 2.0,
-    );
+    // Tactical dark background
+    final bgPaint = Paint()..color = const Color(0xDD0F172A);
+    canvas.drawRRect(badgeRRect, bgPaint);
+
+    final borderPaint = Paint()
+      ..color = tierBorder
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 1.0;
+    canvas.drawRRect(badgeRRect, borderPaint);
 
     final textSpan = TextSpan(
-      text: '★ $level',
+      text: '★$level',
       style: const TextStyle(
-        color: GameColors.ink,
-        fontSize: 10,
-        fontWeight: FontWeight.w900,
+        color: Colors.white,
+        fontSize: 8.0,
+        fontWeight: FontWeight.w800,
+        letterSpacing: -0.2,
       ),
     );
     final textPainter = TextPainter(

@@ -87,19 +87,7 @@ class ArenaBackgroundComponent extends PositionComponent with HasGameReference<B
       canvas.drawRect(Rect.fromLTWH(0, 0, width, height), groundPaint);
     }
 
-    // Lane dividing dashed lines for horde visibility
-    final lanePaint = Paint()
-      ..color = Colors.white.withValues(alpha: 0.10)
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 2.0;
 
-    final laneStep = width / GameConfig.spawnLanes;
-    for (int i = 1; i < GameConfig.spawnLanes; i++) {
-      final lx = i * laneStep;
-      for (double ly = 30; ly < 490; ly += 30) {
-        canvas.drawLine(Offset(lx, ly), Offset(lx, ly + 14), lanePaint);
-      }
-    }
 
     // Pre-rendered side props (Clause 916: sandbags, crates, barrels, radar, lamp, grass)
     _drawProp(canvas, WorldArtAssets.sandbags, const Offset(36, 180), 46, 26);
